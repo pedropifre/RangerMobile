@@ -115,7 +115,6 @@ public class LineDraw : Singleton<LineDraw>
         
         if (pointsList.Count > lineLenghtMax)
         {
-            Debug.Log("meu deus");
             DestroyElement();
         }
         else return;
@@ -143,7 +142,6 @@ public class LineDraw : Singleton<LineDraw>
             currentLine.HalfPoint = (Vector3)pointsList[pointsList.Count / 2];
             if (isLinesIntersect(lines[i], currentLine))
             {
-                Debug.Log("intersect");
                 pointsList.RemoveRange(0, pointsList.Count);
                 index = i; if (index <= 0) index = 1; line.positionCount = index;
                 fingerpos_startpoint = currentLine.StartPoint;
@@ -185,8 +183,7 @@ public class LineDraw : Singleton<LineDraw>
 
             if (dist + EnemyTime.GetComponent<CircleCollider2D>().radius <= raggio)
             {
-                //Enemt detected
-                Debug.Log("Circulo");
+                //Enemy detected
                 EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
                 break;
             }
@@ -231,12 +228,17 @@ public class LineDraw : Singleton<LineDraw>
         }
         if (otherCollider.gameObject.tag == "Pokemon" || otherCollider.gameObject.tag == "wall")
         {
-            sFXBreakStyler.clip = sFXManager.PlaySFX("BreakStyler");
-            sFXBreakStyler.Play();
+            PlayBreakSound();
             DestroyElement();
         }
     }
 
+    public void PlayBreakSound()
+    {
+        sFXBreakStyler.clip = sFXManager.PlaySFX("BreakStyler");
+        sFXBreakStyler.Play();
+
+    }
     //    Following method Detect if the line stay trigger with wall
     private void OnTriggerStay2D(Collider2D otherCollider) 
     { 
@@ -248,7 +250,7 @@ public class LineDraw : Singleton<LineDraw>
     //    Following method destroy all Line's object 
     public void DestroyElement()
     {
-        Debug.Log("?");
+  
         
         Destroy(curentGuard); 
         pointsList.Clear();

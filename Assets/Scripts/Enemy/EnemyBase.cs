@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour
 {
     public SO_Enemy sO_Enemy;
     private EnemyController enemymovement;
-    public int life = 10;
+    public HealthBase healthBase;
     public int monsterNumb;
     public ParticleSystem particleCatch;
     
@@ -23,24 +23,25 @@ public class EnemyBase : MonoBehaviour
 
     [Header("Graphs")]
     public SpriteRenderer lifeBar;
+    public float vanishTime;
 
 
     [SerializeField] private float _LifeDropGraph;
     void Start()
     {
         enemymovement = this.GetComponent<EnemyController>();
-        _LifeDropGraph = (float)1 / life;
-        Debug.Log(_LifeDropGraph);
+        _LifeDropGraph = (float)1 / healthBase._currentLife;
     }
 
     public void DamageEnemy(int damage=1)
     {
-        life -= damage;
+        healthBase.Damage(damage);
         
         lifeBar.size = new Vector2(lifeBar.size.x - _LifeDropGraph, 1);
 
-        if (life <= 0)
+        if (healthBase._currentLife <= 0)
         {
+            Debug.Log("ue");
             lineDraw.RemoveFromList(monsterNumb);
             Kill();
         }
@@ -57,7 +58,7 @@ public class EnemyBase : MonoBehaviour
         sfxCatch.clip = sFXManager.PlaySFX("Catch");
         sfxCatch.Play();
         particleCatch.Play();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(vanishTime);
         Destroy(gameObject);
     }
 }
