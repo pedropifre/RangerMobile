@@ -1797,6 +1797,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5152653606605205129, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: m_Radius
+      value: 1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: target
       value: 
@@ -2609,6 +2613,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1538674652 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+  m_PrefabInstance: {fileID: 159107154903974539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556089475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,6 +3432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1132916751}
+  - {fileID: 1538674652}
   m_Father: {fileID: 602357536}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3570,6 +3580,7 @@ MonoBehaviour:
   sFXManager: {fileID: 442913657}
   sFXPlaceStyler: {fileID: 520198573}
   sFXBreakStyler: {fileID: 146202306}
+  particleBreak: {fileID: 159107153992355157, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
 --- !u!82 &2105943790
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3786,6 +3797,91 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &159107154903974539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2105943786}
+    m_Modifications:
+    - target: {fileID: 159107153992355152, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_Name
+      value: PS_LineBreak
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355152, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355157, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: InitialModule.randomizeRotationDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355158, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 159107153992355158, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_Flip.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355158, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_Flip.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355158, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_Flip.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 159107153992355159, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2178248183233955473, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 943195980bbc5704193c2038bcb5b0fd, type: 3}
 --- !u!1001 &3338870486633207286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3867,11 +3963,15 @@ PrefabInstance:
       objectReference: {fileID: 2105943786}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: ammount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: keyToShoot
       value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: timeBetweenShotMax
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: timeBetweenShotMin

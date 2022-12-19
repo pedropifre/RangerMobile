@@ -74,18 +74,26 @@ public class GunBase : MonoBehaviour
         while (turn < ammount)
         {
             Quaternion test = new Quaternion(0,0,0,0);
-            if (turn == 0)
+            if (turn == 0 && ammount==1)
             {
                 var projectile = Instantiate(prefabProjectile);
+                projectile.transform.localEulerAngles =
+                        new Vector3(
+                        positionToShoot.transform.eulerAngles.x,
+                        positionToShoot.transform.eulerAngles.y,
+                        positionToShoot.transform.eulerAngles.z - (90));
                 projectile.transform.position = positionToShoot.position;
-                projectile.transform.rotation = positionToShoot.transform.rotation;
             }
             else
             {
-                positionToShoot.rotation = positionToShoot.rotation * Quaternion.Euler(0,0,(turn*_angleShoot));
-                var projectile = Instantiate(prefabProjectile, positionToShoot.position,positionToShoot.rotation);
-                
-                projectile.transform.rotation = test;
+
+                var projectile = Instantiate(prefabProjectile);
+                projectile.transform.localEulerAngles= 
+                        new Vector3(
+                        projectile.transform.localEulerAngles.x,
+                        projectile.transform.localEulerAngles.y,
+                        projectile.transform.localEulerAngles.z+(turn * _angleShoot));
+                projectile.transform.position = positionToShoot.position;
 
             }
             //Debug.Log("Turn = "+turn+" .       Normal rotation = " + positionToShoot.transform.rotation);

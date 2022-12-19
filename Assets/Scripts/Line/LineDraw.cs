@@ -37,6 +37,8 @@ public class LineDraw : Singleton<LineDraw>
     public AudioSource sFXPlaceStyler;
     public AudioSource sFXBreakStyler;
 
+    [Header("Audio Play")]
+    public ParticleSystem particleBreak;
 
     // Structure for line points
     struct myLine { public Vector3 StartPoint; public Vector3 EndPoint; public Vector3 HalfPoint; };
@@ -228,6 +230,15 @@ public class LineDraw : Singleton<LineDraw>
         }
         if (otherCollider.gameObject.tag == "Pokemon" || otherCollider.gameObject.tag == "wall")
         {
+            for (var t = 0;t<pointsList.Count;t++)
+            {
+                if (t % 2 == 0)
+                {
+                    Instantiate(particleBreak);
+                    particleBreak.transform.position = new Vector3(pointsList[t].x, pointsList[t].y);
+                    particleBreak.Play();
+                }
+            }
             PlayBreakSound();
             DestroyElement();
         }
