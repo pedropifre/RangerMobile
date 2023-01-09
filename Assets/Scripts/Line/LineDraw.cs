@@ -187,7 +187,7 @@ public class LineDraw : Singleton<LineDraw>
             {
                 //Enemy detected
                 EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
-                break;
+                //break;
             }
         }
 
@@ -197,13 +197,17 @@ public class LineDraw : Singleton<LineDraw>
     public void RemoveFromList(int EnemyNumb)
     {
         
+        List<GameObject> enemysToRemove = new List<GameObject>();
         foreach (var EnemyN in EnemyOBJ)
         {
             if (EnemyN.GetComponent<EnemyBase>().monsterNumb == EnemyNumb)
             {
-                EnemyOBJ.Remove(EnemyN);
-                break;
+                enemysToRemove.Add(EnemyN);
             }
+        }
+        foreach (var y in enemysToRemove)
+        {
+            EnemyOBJ.Remove(y);
         }
     }
 
@@ -234,14 +238,20 @@ public class LineDraw : Singleton<LineDraw>
             {
                 if (t % 2 == 0)
                 {
-                    Instantiate(particleBreak);
-                    particleBreak.transform.position = new Vector3(pointsList[t].x, pointsList[t].y);
-                    particleBreak.Play();
+                    //StartCoroutine(SpawnParticleBreak(t));
                 }
             }
             PlayBreakSound();
             DestroyElement();
         }
+    }
+    IEnumerator SpawnParticleBreak(int v)
+    {
+        ParticleSystem particle = Instantiate(particleBreak);
+        particleBreak.transform.position = new Vector3(pointsList[v].x, pointsList[v].y);
+        particleBreak.Play();
+        yield return new WaitForSeconds(.5f);
+        Destroy(particle);
     }
 
     public void PlayBreakSound()
@@ -254,7 +264,7 @@ public class LineDraw : Singleton<LineDraw>
     private void OnTriggerStay2D(Collider2D otherCollider) 
     { 
         if (otherCollider.gameObject.tag == "wall") DestroyElement();
-        Debug.Log("meu deus");
+        
     }
 
 

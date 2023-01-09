@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Core.Singleton;
 using SystemSFX;
+using Pathfinding;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -27,8 +28,16 @@ public class EnemyBase : MonoBehaviour
 
 
     [SerializeField] private float _LifeDropGraph;
+
+
+    private void Awake()
+    {
+        //gameObject.GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Target").transform;
+
+    }
     void Start()
     {
+
         enemymovement = this.GetComponent<EnemyController>();
         _LifeDropGraph = (float)1 / healthBase._currentLife;
     }
@@ -41,7 +50,6 @@ public class EnemyBase : MonoBehaviour
 
         if (healthBase._currentLife <= 0)
         {
-            Debug.Log("ue");
             lineDraw.RemoveFromList(monsterNumb);
             Kill();
         }

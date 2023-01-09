@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Pathfinding;
 
 public class GunBase : MonoBehaviour
 {
     public ProjectileBase prefabProjectile;
 
     public Transform positionToShoot;
+    
 
     public Transform target;
     private Coroutine _currentCoroutine;
@@ -24,6 +26,11 @@ public class GunBase : MonoBehaviour
     [SerializeField] private float _angleShoot;
 
 
+
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("LineController").transform;
+    }
 
     // Update is called once per frame
     private void Start()
