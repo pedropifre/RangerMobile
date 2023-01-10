@@ -2281,11 +2281,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.49
+      value: -1.58
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.82
+      value: -5.99
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2341,7 +2341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5152653606605205129, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_Radius
-      value: 1.55
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: target
@@ -2350,6 +2350,14 @@ PrefabInstance:
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: keyToShoot
       value: 115
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: distanceToShoot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: timeBetweenShotMin
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: playerSideReference
@@ -2549,6 +2557,11 @@ MonoBehaviour:
   zoomOn: 0
   maxIn: 3
   maxOut: 10
+--- !u!1 &990271844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3338870486356549308, guid: 2981f640b498f9748834324b418bc660, type: 3}
+  m_PrefabInstance: {fileID: 825396767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1060373878
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,6 +3759,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1601113917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3338870486356549308, guid: 2981f640b498f9748834324b418bc660, type: 3}
+  m_PrefabInstance: {fileID: 3338870486633207286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1614782177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4321,7 +4339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1891775472
 Transform:
   m_ObjectHideFlags: 0
@@ -4330,7 +4348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891775471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.11, y: -6.58, z: -1.4639589}
+  m_LocalPosition: {x: -2.34, y: -8.94, z: -1.4639589}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 278891342}
@@ -5073,7 +5091,9 @@ MonoBehaviour:
   pointsList: []
   GuardPrefab: {fileID: 5537988173106386162, guid: 4e2152e3b91e51d419c34bd54ece3865, type: 3}
   curentGuard: {fileID: 0}
-  EnemyOBJ: []
+  EnemyOBJ:
+  - {fileID: 1601113917}
+  - {fileID: 990271844}
   lineLenghtMax: 200
   line: {fileID: 0}
   sFXManager: {fileID: 442913657}
@@ -5503,6 +5523,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1614782178}
+    - target: {fileID: 93545608000768354, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5559,6 +5583,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire1
       objectReference: {fileID: 0}
+    - target: {fileID: 5152653606605205129, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: m_Radius
+      value: 0.79
+      objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: target
       value: 
@@ -5566,6 +5594,18 @@ PrefabInstance:
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: keyToShoot
       value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: distanceToShoot
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: timeBetweenShotMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
+      propertyPath: timeBetweenShotMin
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6877379183827308207, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: playerSideReference

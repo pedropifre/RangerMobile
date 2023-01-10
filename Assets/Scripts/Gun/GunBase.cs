@@ -22,10 +22,13 @@ public class GunBase : MonoBehaviour
     public float timeBetweenShotMax = 5f;
     public int ammount = 1;
 
+    [Header("Raycast config")]
+    public float distanceToShoot = 1;
+
     [SerializeField]private float timeBetweenShot = .3f;
     [SerializeField] private float _angleShoot;
 
-
+    RaycastHit2D hit;
 
     private void Awake()
     {
@@ -51,17 +54,35 @@ public class GunBase : MonoBehaviour
         // Rotate the game object to face the target game object
         transform.right = direction;
 
-        if (Input.GetKeyDown(keyToShoot))
+        //raycast start
+        if (Input.touchCount > 0)
         {
-            _currentCoroutine = StartCoroutine(StartShoot());
+            Touch touch = Input.GetTouch(0);
+
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            Debug.Log(hit.collider);
+
+            //check the distance between the enemy and the line
+            if (hit.collider != null && hit.collider.tag == "LineController")
+            {
+                float distance = Vector2.Distance(transform.position, hit.point);
+
+                Debug.Log("Monster = " + gameObject.name + " Distance = " + distance);
+                if (distance < distanceToShoot)
+                {
+                    //Debug.Log("Monster "+gameObject.name+" Atirar");
+                    StartCoroutine(StartShoot());
+                }
+                
+            }
+
         }
-        else if(Input.GetKeyUp(keyToShoot))
-        {
-            if (_currentCoroutine != null)
-                StopCoroutine(_currentCoroutine);
-        } 
+
     }
 
+    
     IEnumerator StartShoot()
     {
         if(_isShooting == false)
@@ -113,15 +134,26 @@ public class GunBase : MonoBehaviour
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "LineController")
-        {
-            //courotine of attack
-            StartCoroutine(StartShoot());
-            //Debug.Log("Attack");
-        }
-        
-    }
+    //Shot when detects line in collider
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "LineController")
+    //    {
+    //        //courotine of attack
+    //        StartCoroutine(StartShoot());
+    //        //Debug.Log("Attack");
+    //    }
 
+    //}
+    void OnDrawGizmos()
+    {
+        if (hit.collider != null)
+        {
+            // Draw a line from the enemy to the touchpoint
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, hit.point);
+            float distance = Vector2.Distance(transform.position, hit.point);
+            
+        }
+    }
 }

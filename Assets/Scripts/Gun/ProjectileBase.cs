@@ -37,14 +37,17 @@ public class ProjectileBase : MonoBehaviour
     {
         var stylus = collision.transform.GetComponent<HealthBase>();
 
-        if (stylus != null)
+        if (stylus != null && collision.gameObject.tag != "Pokemon")
         {
             Debug.Log("Dano Stylus");
             stylus.Damage(1);
             Destroy(gameObject);
             var lineDraw = collision.transform.GetComponent<LineDraw>();
-            lineDraw.PlayBreakSound();
-            lineDraw.DestroyElement();
+            if (lineDraw != null)
+            {
+                lineDraw.PlayBreakSound();
+                lineDraw.DestroyElement();
+            }
         }
         
     }

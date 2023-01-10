@@ -42,8 +42,8 @@ public class EnemyMovement : MonoBehaviour
             transform.position = transform.position + (Vector3)(direction * speed * Time.deltaTime);
 
             // Get the width and height of the screen in world units
-            float screenHeight = Camera.main.orthographicSize * 2;
-            float screenWidth = screenHeight * Camera.main.aspect;
+            float screenHeight = (Camera.main.orthographicSize * 2)*.8f ;
+            float screenWidth = (screenHeight * Camera.main.aspect)*.8f;
 
             // Check if the enemy has moved outside the boundaries of the screen
             if (transform.position.x < -screenWidth / 2 || transform.position.x > screenWidth / 2 ||
