@@ -13,7 +13,7 @@ public class ProjectileBase : MonoBehaviour
     [Header("Projectile config")]
     public float speedprojectile = 1;
     public float timeToDestroy = 2f;
-    
+   
 
 
 
@@ -47,6 +47,14 @@ public class ProjectileBase : MonoBehaviour
             {
                 lineDraw.PlayBreakSound();
                 lineDraw.DestroyElement();
+            }
+        }
+        else if (collision.gameObject.tag != "Objectives")
+        {
+            var castleHealth = collision.gameObject.GetComponent<HealthBase>();
+            if (castleHealth != null)
+            {
+                castleHealth.Damage();
             }
         }
         

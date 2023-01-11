@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 direction;
 
     [Header("Still")]
-    [SerializeField]private bool isWalking = false;
+    [SerializeField]private bool isWalking = true;
     public float standingWalkingTime;
     public float standingStillTime;
     
@@ -36,8 +36,8 @@ public class EnemyMovement : MonoBehaviour
         if (isWalking)
         {
 
-            Debug.Log("Width = " + Screen.width);
-            Debug.Log("Height = " + Screen.height);
+            //Debug.Log("Width = " + Screen.width);
+            //Debug.Log("Height = " + Screen.height);
             // Update the position of the enemy based on the current direction
             transform.position = transform.position + (Vector3)(direction * speed * Time.deltaTime);
 
@@ -47,15 +47,15 @@ public class EnemyMovement : MonoBehaviour
 
             // Check if the enemy has moved outside the boundaries of the screen
             if (transform.position.x < -screenWidth / 2 || transform.position.x > screenWidth / 2 ||
-                transform.position.y < -screenHeight / 2 || transform.position.y > screenHeight / 2)
+                transform.position.y < -screenHeight / 4 || transform.position.y > screenHeight / 1.8)
             {
                 // If so, change the direction of the enemy
-                direction = RandomDirection();
+                direction *= -1 * Random.Range(0, 10f); ;
             }
         }
         else
         {
-            StartCoroutine(StandStill());
+            //StartCoroutine(StandStill());
         }
     }
 

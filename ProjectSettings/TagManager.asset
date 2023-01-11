@@ -8,6 +8,7 @@ TagManager:
   - Pokemon
   - Target
   - ColliderWall
+  - Objectives
   layers:
   - Default
   - TransparentFX

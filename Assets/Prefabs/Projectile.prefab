@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3040646775530119886}
   - component: {fileID: -27944446788926221}
   m_Layer: 0
-  m_Name: ProjectileTest
+  m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   side: 1
   damageAmount: 1
   speedprojectile: 0.2
-  timeToDestroy: 5
+  timeToDestroy: 10
 --- !u!58 &-3040646775530119886
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -8,7 +8,9 @@ public class GunBase : MonoBehaviour
 {
     public ProjectileBase prefabProjectile;
 
-    public Transform positionToShoot;
+    [Header("Aim")]
+    public Transform positionToShootLine;
+    public GameObject[] positionObjectives;
     
 
     public Transform target;
@@ -16,6 +18,7 @@ public class GunBase : MonoBehaviour
 
     public KeyCode keyToShoot;
     private bool _isShooting = false;
+    [SerializeField] private bool _isShootingObjective = false;
 
     [Header("Projectile config")]
     public float timeBetweenShotMin = .3f;
@@ -26,6 +29,7 @@ public class GunBase : MonoBehaviour
     public float distanceToShoot = 1;
 
     [SerializeField]private float timeBetweenShot = .3f;
+    [SerializeField]private float timeBetweenShotObjective = 5f;
     [SerializeField] private float _angleShoot;
 
     RaycastHit2D hit;
@@ -33,6 +37,7 @@ public class GunBase : MonoBehaviour
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("LineController").transform;
+        positionObjectives = GameObject.FindGameObjectsWithTag("Objectives");
     }
 
     // Update is called once per frame
@@ -48,23 +53,26 @@ public class GunBase : MonoBehaviour
     }
     void Update()
     {
-        // Get the direction from the current game object to the target game object
-        Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
-
-        // Rotate the game object to face the target game object
-        transform.right = direction;
-
+        
+        Debug.Log(Input.touchCount);
         //raycast start
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 )
         {
+            // Get the direction from the current game object to the target game object
+            Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
+
+            // Rotate the game object to face the target game object
+            transform.right = direction;
+
             Touch touch = Input.GetTouch(0);
 
             Ray ray = Camera.main.ScreenPointToRay(touch.position);
             hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-            Debug.Log(hit.collider);
+            //Debug.Log(hit.collider);
 
             //check the distance between the enemy and the line
+            //ksdnjif
             if (hit.collider != null && hit.collider.tag == "LineController")
             {
                 float distance = Vector2.Distance(transform.position, hit.point);
@@ -79,10 +87,29 @@ public class GunBase : MonoBehaviour
             }
 
         }
+        else
+        {
+            StartCoroutine(StartShootObjective());
+            
+        }
 
     }
 
-    
+    IEnumerator StartShootObjective()
+    {
+        if (_isShootingObjective == false)
+        {
+            _isShootingObjective = true;
+            Shoot();
+            var objTargeted = Random.Range(0, positionObjectives.Length);
+            // Get the direction from the current game object to the target game object
+            Vector2 direction = (Vector2)positionObjectives[objTargeted].transform.position - (Vector2)transform.position;
+            // Rotate the game object to face the target game object
+            transform.right = direction;
+            yield return new WaitForSeconds(timeBetweenShotObjective);
+            _isShootingObjective = false;
+        }
+    }
     IEnumerator StartShoot()
     {
         if(_isShooting == false)
@@ -107,10 +134,10 @@ public class GunBase : MonoBehaviour
                 var projectile = Instantiate(prefabProjectile);
                 projectile.transform.localEulerAngles =
                         new Vector3(
-                        positionToShoot.transform.eulerAngles.x,
-                        positionToShoot.transform.eulerAngles.y,
-                        positionToShoot.transform.eulerAngles.z - (90));
-                projectile.transform.position = positionToShoot.position;
+                        positionToShootLine.transform.eulerAngles.x,
+                        positionToShootLine.transform.eulerAngles.y,
+                        positionToShootLine.transform.eulerAngles.z - (90));
+                projectile.transform.position = positionToShootLine.position;
             }
             else
             {
@@ -121,12 +148,12 @@ public class GunBase : MonoBehaviour
                         projectile.transform.localEulerAngles.x,
                         projectile.transform.localEulerAngles.y,
                         projectile.transform.localEulerAngles.z+(turn * _angleShoot));
-                projectile.transform.position = positionToShoot.position;
+                projectile.transform.position = positionToShootLine.position;
 
             }
             //Debug.Log("Turn = "+turn+" .       Normal rotation = " + positionToShoot.transform.rotation);
             //Debug.Log("Turn = "+turn+" .       added rotation = " + Quaternion.Euler((_angleShoot * turn), (_angleShoot * turn), 0));
-            Debug.Log(_angleShoot * turn);
+           //Debug.Log(_angleShoot * turn);
             turn++;
 
         }
