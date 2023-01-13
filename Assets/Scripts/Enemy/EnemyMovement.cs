@@ -32,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(direction);
 
         if (isWalking)
         {
@@ -50,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
                 transform.position.y < -screenHeight / 4 || transform.position.y > screenHeight / 1.8)
             {
                 // If so, change the direction of the enemy
-                direction *= -1 * Random.Range(0, 10f); ;
+                ChangeDirection();
             }
         }
         else
@@ -78,8 +79,8 @@ public class EnemyMovement : MonoBehaviour
         float radians = angle * Mathf.Deg2Rad;
 
         // Calculate the x and y components of the direction vector using trigonometry
-        float x = Mathf.Cos(radians);
-        float y = Mathf.Sin(radians);
+        float x = Mathf.Cos(radians)*-1;
+        float y = Mathf.Sin(radians)*-1;
 
         // Return the direction as a Vector2
         return new Vector2(x, y);

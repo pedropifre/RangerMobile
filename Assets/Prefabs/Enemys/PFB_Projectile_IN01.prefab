@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3040646775530119886}
   - component: {fileID: -27944446788926221}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: PFB_Projectile_IN01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   direction: {fileID: 0}
   side: 1
   damageAmount: 1
-  speedprojectile: 0.2
-  timeToDestroy: 10
+  speedprojectile: 0.6
+  timeToDestroy: 7
 --- !u!58 &-3040646775530119886
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -127,13 +127,13 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5611603726421270959}
   m_BodyType: 0
-  m_Simulated: 1
+  m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

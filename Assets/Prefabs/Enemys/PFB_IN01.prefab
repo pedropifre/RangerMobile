@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 4198629996176193103}
   - component: {fileID: 633329280716149643}
   m_Layer: 0
-  m_Name: PFB_MonsterFire
+  m_Name: PFB_IN01
   m_TagString: Pokemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -552,14 +552,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 7334551846202022094, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
-  positionToShoot: {fileID: 1466561400}
+  positionToShootLine: {fileID: 1374043431298128939}
+  positionObjectives: []
   target: {fileID: 0}
-  keyToShoot: 0
-  timeBetweenShotMin: 4
-  timeBetweenShotMax: 9
+  keyToShoot: 97
+  _isShootingObjective: 0
+  timeBetweenShotMin: 2
+  timeBetweenShotMax: 4
   ammount: 1
-  timeBetweenShot: 2
-  _angleShoot: 0
+  distanceToShoot: 3
+  timeBetweenShotObjective: 4
 --- !u!1 &7115637899811549765
 GameObject:
   m_ObjectHideFlags: 0

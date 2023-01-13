@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using Pathfinding;
+using DG.Tweening;
 
 public class GunBase : MonoBehaviour
 {
@@ -28,9 +29,11 @@ public class GunBase : MonoBehaviour
     [Header("Raycast config")]
     public float distanceToShoot = 1;
 
-    [SerializeField]private float timeBetweenShot = .3f;
+    [Header("Objective Shooting")]
     [SerializeField]private float timeBetweenShotObjective = 5f;
-    [SerializeField] private float _angleShoot;
+    public float velocityObjective =3f;
+    private float timeBetweenShot = .3f;
+    private float _angleShoot;
 
     RaycastHit2D hit;
 
@@ -54,7 +57,7 @@ public class GunBase : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(Input.touchCount);
+        //Debug.Log(Input.touchCount);
         //raycast start
         if (Input.touchCount > 0 )
         {
@@ -100,12 +103,15 @@ public class GunBase : MonoBehaviour
         if (_isShootingObjective == false)
         {
             _isShootingObjective = true;
-            Shoot();
+            //Shoot();
             var objTargeted = Random.Range(0, positionObjectives.Length);
             // Get the direction from the current game object to the target game object
-            Vector2 direction = (Vector2)positionObjectives[objTargeted].transform.position - (Vector2)transform.position;
+            //Vector2 direction = (Vector2)positionObjectives[objTargeted].transform.position - (Vector2)transform.position;
             // Rotate the game object to face the target game object
-            transform.right = direction;
+            //transform.right = direction;
+            var projectile = Instantiate(prefabProjectile);
+            projectile.transform.position = positionToShootLine.position;
+            projectile.transform.DOMove((Vector2)positionObjectives[objTargeted].transform.position, velocityObjective);    
             yield return new WaitForSeconds(timeBetweenShotObjective);
             _isShootingObjective = false;
         }
@@ -151,9 +157,7 @@ public class GunBase : MonoBehaviour
                 projectile.transform.position = positionToShootLine.position;
 
             }
-            //Debug.Log("Turn = "+turn+" .       Normal rotation = " + positionToShoot.transform.rotation);
-            //Debug.Log("Turn = "+turn+" .       added rotation = " + Quaternion.Euler((_angleShoot * turn), (_angleShoot * turn), 0));
-           //Debug.Log(_angleShoot * turn);
+
             turn++;
 
         }
