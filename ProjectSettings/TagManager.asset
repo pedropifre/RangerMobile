@@ -7,8 +7,8 @@ TagManager:
   - LineController
   - Pokemon
   - Target
-  - ColliderWall
   - Objectives
+  - WalkingTarget
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,7 @@ public class ProjectileBase : MonoBehaviour
     {
         var stylus = collision.transform.GetComponent<HealthBase>();
 
-        if (stylus != null && collision.gameObject.tag != "Pokemon")
+        if (stylus != null && collision.gameObject.tag == "LineController")
         {
             Debug.Log("Dano Stylus");
             stylus.Damage(1);
@@ -49,14 +49,28 @@ public class ProjectileBase : MonoBehaviour
                 lineDraw.DestroyElement();
             }
         }
-        else if (collision.gameObject.tag != "Objectives")
+        else if (collision.gameObject.tag == "Objectives")
         {
+
             var castleHealth = collision.gameObject.GetComponent<HealthBase>();
             if (castleHealth != null)
             {
+                StartCoroutine(DamageColor(collision.gameObject));
                 castleHealth.Damage();
+                
             }
         }
         
+    }
+
+    IEnumerator DamageColor(GameObject objColor)
+    {
+        var color = objColor.GetComponent<SpriteRenderer>().color;
+        objColor.GetComponent<SpriteRenderer>().color = new Color32(253, 151, 151, 255);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
+        yield return new WaitForSeconds(.5f);
+        objColor.GetComponent<SpriteRenderer>().color = Color.white;
+        Destroy(gameObject);
+
     }
 }

@@ -20,6 +20,7 @@ public class GunBase : MonoBehaviour
     public KeyCode keyToShoot;
     private bool _isShooting = false;
     [SerializeField] private bool _isShootingObjective = false;
+    [SerializeField] public bool canShootingObjective = false; //to other scrit can deactivate the shooting bit
 
     [Header("Projectile config")]
     public float timeBetweenShotMin = .3f;
@@ -75,7 +76,6 @@ public class GunBase : MonoBehaviour
             //Debug.Log(hit.collider);
 
             //check the distance between the enemy and the line
-            //ksdnjif
             if (hit.collider != null && hit.collider.tag == "LineController")
             {
                 float distance = Vector2.Distance(transform.position, hit.point);
@@ -100,7 +100,7 @@ public class GunBase : MonoBehaviour
 
     IEnumerator StartShootObjective()
     {
-        if (_isShootingObjective == false)
+        if (!_isShootingObjective && canShootingObjective)
         {
             _isShootingObjective = true;
             //Shoot();
