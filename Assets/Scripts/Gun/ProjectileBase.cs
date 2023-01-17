@@ -20,7 +20,7 @@ public class ProjectileBase : MonoBehaviour
     private GunBase gunBase;
     private void Awake()
     {
-        Destroy(gameObject, timeToDestroy);
+        //Destroy(gameObject, timeToDestroy);
         gunBase = GameObject.FindObjectOfType<GunBase>();
         direction = gunBase.gameObject;
         
@@ -70,7 +70,8 @@ public class ProjectileBase : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         yield return new WaitForSeconds(.5f);
         objColor.GetComponent<SpriteRenderer>().color = Color.white;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
 
     }
 }

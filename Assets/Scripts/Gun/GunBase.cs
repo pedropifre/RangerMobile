@@ -27,6 +27,10 @@ public class GunBase : MonoBehaviour
     public float timeBetweenShotMax = 5f;
     public int ammount = 1;
 
+
+    [Header("Pooling Config")]
+    public List<GameObject> poolingShoots;
+
     [Header("Raycast config")]
     public float distanceToShoot = 1;
 
@@ -35,6 +39,7 @@ public class GunBase : MonoBehaviour
     public float velocityObjective =3f;
     private float timeBetweenShot = .3f;
     private float _angleShoot;
+    public float recoil = .1f;
 
     RaycastHit2D hit;
 
@@ -103,16 +108,19 @@ public class GunBase : MonoBehaviour
         if (!_isShootingObjective && canShootingObjective)
         {
             _isShootingObjective = true;
-            //Shoot();
             var objTargeted = Random.Range(0, positionObjectives.Length);
-            // Get the direction from the current game object to the target game object
-            //Vector2 direction = (Vector2)positionObjectives[objTargeted].transform.position - (Vector2)transform.position;
-            // Rotate the game object to face the target game object
-            //transform.right = direction;
-            var projectile = Instantiate(prefabProjectile);
-            projectile.transform.position = positionToShootLine.position;
-            projectile.transform.DOMove((Vector2)positionObjectives[objTargeted].transform.position, velocityObjective);    
+            foreach (var d in poolingShoots)
+            {
+                d.transform.position = positionToShootLine.position;
+                d.SetActive(true);
+                d.transform.DOMove((Vector2)positionObjectives[objTargeted].transform.position, velocityObjective);    
+                yield return new WaitForSeconds(recoil);
+            }
             yield return new WaitForSeconds(timeBetweenShotObjective);
+            foreach (var a in poolingShoots)
+            {
+                a.SetActive(false);
+            }
             _isShootingObjective = false;
         }
     }

@@ -16,6 +16,7 @@ public class EnemyMovement2 : MonoBehaviour
 
     private bool _canMove = true;
     private GunBase gunBase;
+    private int _point;
 
     private void Start()
     {
@@ -31,14 +32,19 @@ public class EnemyMovement2 : MonoBehaviour
     {
         if (_canMove)
         {
-            gunBase.canShootingObjective = false;
-            _canMove = false;
-            var point = Random.Range(0, TriggerPoints.Count);
-            gameObject.transform.DOMove(TriggerPoints[point].transform.position, movementSpeed).SetEase(ease); ;
-            yield return new WaitForSeconds(movementSpeed);
-            gunBase.canShootingObjective = true;
-            yield return new WaitForSeconds(stopDuration);
-            _canMove = true;
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
+            {
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+                _canMove = false;
+                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease); ;
+                yield return new WaitForSeconds(movementSpeed);
+                gunBase.canShootingObjective = true;
+                yield return new WaitForSeconds(stopDuration);
+                _canMove = true;
+            }
+            
         }
     }
 }

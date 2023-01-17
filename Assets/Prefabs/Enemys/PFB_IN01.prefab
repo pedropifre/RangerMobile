@@ -484,6 +484,10 @@ MonoBehaviour:
   timeBetweenShotMin: 2
   timeBetweenShotMax: 4
   ammount: 1
+  poolingShoots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   distanceToShoot: 3
   timeBetweenShotObjective: 4
   velocityObjective: 3

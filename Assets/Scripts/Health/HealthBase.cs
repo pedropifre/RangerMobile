@@ -48,16 +48,17 @@ public class HealthBase : MonoBehaviour, IDamagable
  
     public void Damage(float f)
     {
- 
-        _currentLife -= f * damageMultiply;
 
-     
-        
+        _currentLife -= f * damageMultiply;
         OnDamage?.Invoke(this);
 
         if (healthUI != null)
         {
             healthUI.UpdateLifeUI();
+        }
+        if (_currentLife <= 0)
+        {
+            //resolve destroing objective here
         }
     }
    
