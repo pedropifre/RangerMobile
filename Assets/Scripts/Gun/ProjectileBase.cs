@@ -66,6 +66,7 @@ public class ProjectileBase : MonoBehaviour
     IEnumerator DamageColor(GameObject objColor)
     {
         var color = objColor.GetComponent<SpriteRenderer>().color;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         objColor.GetComponent<SpriteRenderer>().color = new Color32(253, 151, 151, 255);
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         yield return new WaitForSeconds(.5f);

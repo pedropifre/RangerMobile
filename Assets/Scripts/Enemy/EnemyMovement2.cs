@@ -12,11 +12,14 @@ public class EnemyMovement2 : MonoBehaviour
     public float movementSpeed; //Speed that the enemy moves to one place to another
     public Ease ease = Ease.OutBack;
     public GameObject objAttack;
+    public bool canMove;
      
 
     private bool _canMove = true;
     private GunBase gunBase;
     private int _point;
+
+    
 
     private void Start()
     {
@@ -30,7 +33,7 @@ public class EnemyMovement2 : MonoBehaviour
 
     IEnumerator MoveToNextPlace()
     {
-        if (_canMove)
+        if (_canMove && canMove)
         {
             var pointNew = Random.Range(0, TriggerPoints.Count);
             if (pointNew != _point)
@@ -45,6 +48,10 @@ public class EnemyMovement2 : MonoBehaviour
                 _canMove = true;
             }
             
+        }
+        else if (!canMove)
+        {
+            gunBase.canShootingObjective = true;
         }
     }
 }

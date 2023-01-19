@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 278891339}
   - component: {fileID: 1601113918}
   m_Layer: 0
-  m_Name: PFB_IN01
+  m_Name: PFB_IN06
   m_TagString: Pokemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,10 +341,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   stopDuration: 3
-  movementSpeed: 3
+  movementSpeed: 1.5
   ease: 1
   objAttack: {fileID: 3453586438234990927}
-  canMove: 0
+  canMove: 1
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,9 +521,11 @@ MonoBehaviour:
   ammount: 1
   poolingShoots:
   - {fileID: 7185043367684400435}
+  - {fileID: 7185043366104354360}
+  - {fileID: 7185043366027191883}
   distanceToShoot: 3
-  timeBetweenShotObjective: 8
-  velocityObjective: 2
+  timeBetweenShotObjective: 1.7
+  velocityObjective: 1
   recoil: 0.2
   shootDelay: 0
 --- !u!1 &7115637899811549765
@@ -5518,6 +5520,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
+--- !u!1 &7185043366104354360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5611603726421270959, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
+  m_PrefabInstance: {fileID: 3338870484874063767}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7185043366104354366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611603726421270953, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
@@ -5584,6 +5591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
+--- !u!1 &7185043366027191883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5611603726421270959, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
+  m_PrefabInstance: {fileID: 3338870485013940196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7185043366027191885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611603726421270953, guid: d208ae098d1093b428c4a316fea04c29, type: 3}

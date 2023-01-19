@@ -43,8 +43,14 @@ public class GunBase : MonoBehaviour
 
     RaycastHit2D hit;
 
+    //to do not star shooting 
+    [SerializeField] private float shootDelay;
+    private bool _bDelay = true;
+
+
     private void Awake()
     {
+        shootDelay = Random.Range(3f, 7f);
         target = GameObject.FindGameObjectWithTag("LineController").transform;
         positionObjectives = GameObject.FindGameObjectsWithTag("Objectives");
     }
@@ -107,21 +113,31 @@ public class GunBase : MonoBehaviour
     {
         if (!_isShootingObjective && canShootingObjective)
         {
-            _isShootingObjective = true;
-            var objTargeted = Random.Range(0, positionObjectives.Length);
-            foreach (var d in poolingShoots)
+            //delay
+            if (_bDelay)
             {
-                d.transform.position = positionToShootLine.position;
-                d.SetActive(true);
-                d.transform.DOMove((Vector2)positionObjectives[objTargeted].transform.position, velocityObjective);    
-                yield return new WaitForSeconds(recoil);
+                yield return new WaitForSeconds(shootDelay);
+                _bDelay = false;
             }
-            yield return new WaitForSeconds(timeBetweenShotObjective);
-            foreach (var a in poolingShoots)
+            else
             {
-                a.SetActive(false);
+
+                _isShootingObjective = true;
+                var objTargeted = Random.Range(0, positionObjectives.Length);
+                foreach (var d in poolingShoots)
+                {
+                    d.transform.position = positionToShootLine.position;
+                    d.SetActive(true);
+                    d.transform.DOMove((Vector2)positionObjectives[objTargeted].transform.position, velocityObjective).SetEase(Ease.Linear);    
+                    yield return new WaitForSeconds(recoil);
+                }
+                yield return new WaitForSeconds(timeBetweenShotObjective);
+                foreach (var a in poolingShoots)
+                {
+                    a.SetActive(false);
+                }
+                _isShootingObjective = false;
             }
-            _isShootingObjective = false;
         }
     }
     IEnumerator StartShoot()
