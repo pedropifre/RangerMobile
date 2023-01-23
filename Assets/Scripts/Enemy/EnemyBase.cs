@@ -46,13 +46,28 @@ public class EnemyBase : MonoBehaviour
     {
         healthBase.Damage(damage);
         
-        lifeBar.size = new Vector2(lifeBar.size.x - _LifeDropGraph, 1);
+        lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph*damage), 1);
 
         if (healthBase._currentLife <= 0)
         {
             lineDraw.RemoveFromList(monsterNumb);
             Kill();
         }
+    }
+
+    public void HealEnemy(int heal=1)
+    {
+        if (healthBase._currentLife >= healthBase.StartLife)
+        {
+            return;
+        }
+        else
+        {
+            healthBase.heal(heal);
+            Debug.Log("HealEnemy");
+            lifeBar.size = new Vector2(lifeBar.size.x + (_LifeDropGraph * heal), 1);
+        }
+
     }
 
     public void Kill()

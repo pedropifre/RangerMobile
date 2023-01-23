@@ -69,7 +69,8 @@ public class GunBase : MonoBehaviour
     void Update()
     {
         
-        //Debug.Log(Input.touchCount);
+        
+
         //raycast start
         if (Input.touchCount > 0 )
         {

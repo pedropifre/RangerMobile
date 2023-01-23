@@ -46,6 +46,11 @@ public class HealthBase : MonoBehaviour, IDamagable
     }
 
  
+    public void heal(float f)
+    {
+        _currentLife += f;
+        Debug.Log("HealthBase");
+    }
     public void Damage(float f)
     {
 

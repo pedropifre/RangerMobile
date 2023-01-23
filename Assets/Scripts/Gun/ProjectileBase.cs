@@ -41,7 +41,7 @@ public class ProjectileBase : MonoBehaviour
         {
             Debug.Log("Dano Stylus");
             stylus.Damage(1);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             var lineDraw = collision.transform.GetComponent<LineDraw>();
             if (lineDraw != null)
             {
