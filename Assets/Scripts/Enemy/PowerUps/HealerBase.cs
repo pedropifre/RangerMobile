@@ -14,7 +14,7 @@ public class HealerBase : MonoBehaviour
         
             if (enemyBase != null)
             {
-                Debug.Log("Healer= "+collision.name);
+                //Debug.Log("Healer= "+collision.name);
                 StartCoroutine(healCourotine(enemyBase));
             }
         }

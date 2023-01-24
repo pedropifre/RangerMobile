@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealerBase2 : MonoBehaviour
 {
     private CircleCollider2D trigger;
-    private float checkInterval = 4.0f; // check every 4 seconds
+    public float checkInterval = 4.0f; // check every 4 seconds
     private float timer;
 
     void Start()

@@ -64,7 +64,7 @@ public class EnemyBase : MonoBehaviour
         else
         {
             healthBase.heal(heal);
-            Debug.Log("HealEnemy");
+            //Debug.Log("HealEnemy");
             lifeBar.size = new Vector2(lifeBar.size.x + (_LifeDropGraph * heal), 1);
         }
 

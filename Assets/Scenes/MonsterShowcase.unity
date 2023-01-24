@@ -2066,11 +2066,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.47
+      value: -1.75
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.77
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 3338870486356549304, guid: 2981f640b498f9748834324b418bc660, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3932,6 +3932,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PFB_IN_Healer
       objectReference: {fileID: 0}
+    - target: {fileID: 7215180858852903707, guid: 30eacbcddd7443348acd478ba33fc934, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215180858852903707, guid: 30eacbcddd7443348acd478ba33fc934, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5493185
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215180858852903707, guid: 30eacbcddd7443348acd478ba33fc934, type: 3}
+      propertyPath: m_Color.r
+      value: 0.24620858
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2069544115011182975, guid: 30eacbcddd7443348acd478ba33fc934, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 30eacbcddd7443348acd478ba33fc934, type: 3}
@@ -4517,6 +4529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7df1d6b49e1204eb6426b59a0ff587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkInterval: 4
 --- !u!1 &1726793532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3338870486356549308, guid: 2981f640b498f9748834324b418bc660, type: 3}
