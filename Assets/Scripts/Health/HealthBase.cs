@@ -39,19 +39,13 @@ public class HealthBase : MonoBehaviour, IDamagable
     }
 
 
-    [NaughtyAttributes.Button]
-    public void Damage()
-    {
-        Damage(5);
-    }
-
  
     public void heal(float f)
     {
         _currentLife += f;
         Debug.Log("HealthBase");
     }
-    public void Damage(float f)
+    public void Damage(float f=1)
     {
 
         _currentLife -= f * damageMultiply;

@@ -229,11 +229,13 @@ public class LineDraw : Singleton<LineDraw>
     { 
         if (otherCollider.gameObject.tag == "Bullet" || otherCollider.gameObject.tag == "Obstacle")
         {
-            Debug.Log("meu deus");
+            //Debug.Log("meu deus");
             DestroyElement();
         }
         if (otherCollider.gameObject.tag == "Pokemon" || otherCollider.gameObject.tag == "wall")
         {
+            
+            //PAUSED - spawn particle when line destroyed
             for (var t = 0;t<pointsList.Count;t++)
             {
                 if (t % 2 == 0)
@@ -241,6 +243,7 @@ public class LineDraw : Singleton<LineDraw>
                     //StartCoroutine(SpawnParticleBreak(t));
                 }
             }
+            
             PlayBreakSound();
             DestroyElement();
         }

@@ -56,13 +56,14 @@ public class ProjectileBase : MonoBehaviour
             if (castleHealth != null)
             {
                 StartCoroutine(DamageColor(collision.gameObject));
-                castleHealth.Damage();
+                castleHealth.Damage(1);
                 
             }
         }
         
     }
 
+    //melhorar esse codigo, mudando a cor do castelo ao tomar dano
     IEnumerator DamageColor(GameObject objColor)
     {
         var color = objColor.GetComponent<SpriteRenderer>().color;
