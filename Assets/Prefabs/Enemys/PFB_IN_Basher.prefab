@@ -304,7 +304,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.008731663, y: -0.12443507}
   serializedVersion: 2
-  m_Radius: 0.23
+  m_Radius: 0.65
 --- !u!114 &278891339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,17 +334,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825ed9bc64637d0458fad9334ae7b1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  stopDuration: 3
-  movementSpeed: 1.5
+  TriggerPoints: []
+  isMover: 1
+  stopDuration: 2
+  movementSpeed: 1
   ease: 1
   objAttack: {fileID: 3453586438234990927}
-  canMove: 1
+  isJumper: 0
+  jumpStopTimeMax: 0
+  jumpStopTimeMin: 0
+  isBasher: 0
+  isFlash: 0
+  jumpPoints: 0
+  TimeStopPointsFlashs: 0
+  TimeBtwnPointsFlashs: 0
+  isDugtrio: 0
+  undergroundState: 0
+  spriteTemp: {fileID: 0}
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,15 +525,12 @@ MonoBehaviour:
   timeBetweenShotMin: 2
   timeBetweenShotMax: 4
   ammount: 1
-  poolingShoots:
-  - {fileID: 7185043367684400435}
-  - {fileID: 7185043366104354360}
-  - {fileID: 7185043366027191883}
+  poolingShoots: []
   distanceToShoot: 3
-  timeBetweenShotObjective: 1.7
+  timeBetweenShotObjective: 2000
   velocityObjective: 1
   recoil: 0.2
-  shootDelay: 0
+  shootDelay: 2000
 --- !u!1 &7115637899811549765
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,11 +5523,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
---- !u!1 &7185043366104354360 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5611603726421270959, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
-  m_PrefabInstance: {fileID: 3338870484874063767}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7185043366104354366 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611603726421270953, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
@@ -5591,11 +5589,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
---- !u!1 &7185043366027191883 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5611603726421270959, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
-  m_PrefabInstance: {fileID: 3338870485013940196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7185043366027191885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611603726421270953, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
@@ -5662,11 +5655,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
---- !u!1 &7185043367684400435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5611603726421270959, guid: d208ae098d1093b428c4a316fea04c29, type: 3}
-  m_PrefabInstance: {fileID: 3338870486569567388}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7185043367684400437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5611603726421270953, guid: d208ae098d1093b428c4a316fea04c29, type: 3}

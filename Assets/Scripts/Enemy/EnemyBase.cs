@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Core.Singleton;
 using SystemSFX;
-using Pathfinding;
+using NaughtyAttributes;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -28,12 +28,14 @@ public class EnemyBase : MonoBehaviour
 
 
     [SerializeField] private float _LifeDropGraph;
+    
 
 
     private void Awake()
     {
         //gameObject.GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Target").transform;
-
+        lineDraw = GameObject.FindGameObjectWithTag("LineController").GetComponent<LineDraw>();
+        lineDraw.AddEnemy(gameObject);
     }
     void Start()
     {
@@ -42,6 +44,13 @@ public class EnemyBase : MonoBehaviour
         _LifeDropGraph = (float)1 / healthBase._currentLife;
     }
 
+
+    //teste 
+    [NaughtyAttributes.Button]
+    public void RemoveListing()
+    {
+        lineDraw.RemoveEnemy(gameObject);
+    }
     public void DamageEnemy(int damage=1)
     {
         healthBase.Damage(damage);
@@ -50,7 +59,8 @@ public class EnemyBase : MonoBehaviour
 
         if (healthBase._currentLife <= 0)
         {
-            lineDraw.RemoveFromList(monsterNumb);
+            //remove da lista do line draw e depois deleta o GameObject
+            lineDraw.RemoveEnemy(gameObject);
             Kill();
         }
     }

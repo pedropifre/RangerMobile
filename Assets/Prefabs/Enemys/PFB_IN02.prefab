@@ -334,17 +334,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825ed9bc64637d0458fad9334ae7b1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  TriggerPoints: []
+  isMover: 0
   stopDuration: 5
   movementSpeed: 2
   ease: 1
   objAttack: {fileID: 3453586438234990927}
-  canMove: 0
+  isJumper: 0
+  jumpStopTimeMax: 0
+  jumpStopTimeMin: 0
+  isBasher: 0
+  isFlash: 0
+  jumpPoints: 0
+  TimeStopPointsFlashs: 0
+  TimeBtwnPointsFlashs: 0
+  isDugtrio: 0
+  undergroundState: 0
+  spriteTemp: {fileID: 0}
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0

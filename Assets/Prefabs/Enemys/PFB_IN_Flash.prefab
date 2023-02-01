@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 278891339}
   - component: {fileID: 1601113918}
   m_Layer: 0
-  m_Name: PFB_IN06
+  m_Name: PFB_IN_Flash
   m_TagString: Pokemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,8 +334,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825ed9bc64637d0458fad9334ae7b1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerPoints: []
-  isMover: 0
+  TriggerPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isMover: 1
   stopDuration: 3
   movementSpeed: 1.5
   ease: 1
@@ -344,13 +349,10 @@ MonoBehaviour:
   jumpStopTimeMax: 0
   jumpStopTimeMin: 0
   isBasher: 0
-  isFlash: 0
-  jumpPoints: 0
-  TimeStopPointsFlashs: 0
-  TimeBtwnPointsFlashs: 0
-  isDugtrio: 0
-  undergroundState: 0
-  spriteTemp: {fileID: 0}
+  isFlash: 1
+  jumpPoints: 4
+  TimeStopPointsFlashs: 0.5
+  TimeBtwnPointsFlashs: 0.5
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,95 +1,185 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public List<Transform> TriggerPoints;
 
-    // Set the speed at which the enemy moves
-    public float speed = 2f;
+    [Header("Movement Config")]
+    public bool isMover;
+    public float stopDuration;
+    public float movementSpeed; //Speed that the enemy moves to one place to another
+    public Ease ease = Ease.OutBack;
+    public GameObject objAttack;
 
-    // Set the time interval at which the enemy changes direction
-    public float changeInterval = 2f;
+    [Header("Jump Config")]
+    public bool isJumper;
+    public float jumpStopTimeMax;
+    public float jumpStopTimeMin;
 
-    // Store the current direction of the enemy
-    private Vector2 direction;
+    [Header("Basher Config")]
+    public bool isBasher;
 
-    [Header("Still")]
-    [SerializeField]private bool isWalking = true;
-    public float standingWalkingTime;
-    public float standingStillTime;
+    [Header("Flash Config")]
+    public bool isFlash;
+    public int jumpPoints;
+    public float TimeStopPointsFlashs;
+    public float TimeBtwnPointsFlashs;
+
+    [Header("Dugtrio Config")]
+    public bool isDugtrio;
+    public bool undergroundState = false;
+    public SpriteRenderer spriteTemp;
+
+    private bool _canMove = true; //movment controll for shooting
+    private bool _isJumper = true; //jumper controll
+    private bool _isBasher = false; //basher controll
     
+    private GunBase gunBase;
+    private int _point;
 
 
-    void Start()
+    public void Awake()
     {
-        // Set the initial direction of the enemy
-        direction = RandomDirection();
-
-        // Invoke the ChangeDirection function at the specified interval
-        //InvokeRepeating("StandStill", standingStillInterval, standingStillInterval);
+        
+        var triggerList = GameObject.FindGameObjectsWithTag("WalkingTarget");
+        foreach (var i in triggerList)
+        {
+            TriggerPoints.Add(i.transform);
+        }
+    }
+    private void Start()
+    {
+        gunBase = objAttack.GetComponent<GunBase>();
     }
 
-    void Update()
+    private void Update()
     {
-        Debug.Log(direction);
+        if (!isJumper)  StartCoroutine(MoveToNextPlace());
+        else if(isJumper) StartCoroutine(JumpToNextPlace());
+        
+    }
 
-        if (isWalking)
+    #region Movement
+
+    IEnumerator MoveToNextPlace()
+    {
+        //NORMAL MOVEMENT
+        if (_canMove && isMover && !isBasher && !isFlash && !isDugtrio)
         {
-
-            //Debug.Log("Width = " + Screen.width);
-            //Debug.Log("Height = " + Screen.height);
-            // Update the position of the enemy based on the current direction
-            transform.position = transform.position + (Vector3)(direction * speed * Time.deltaTime);
-
-            // Get the width and height of the screen in world units
-            float screenHeight = (Camera.main.orthographicSize * 2)*.8f ;
-            float screenWidth = (screenHeight * Camera.main.aspect)*.8f;
-
-            // Check if the enemy has moved outside the boundaries of the screen
-            if (transform.position.x < -screenWidth / 2 || transform.position.x > screenWidth / 2 ||
-                transform.position.y < -screenHeight / 4 || transform.position.y > screenHeight / 1.8)
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
             {
-                // If so, change the direction of the enemy
-                ChangeDirection();
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+                _canMove = false;
+                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease); 
+                yield return new WaitForSeconds(movementSpeed);
+                gunBase.canShootingObjective = true;
+                yield return new WaitForSeconds(stopDuration);
+                _canMove = true;
+            }
+            
+        }
+        else if (!isMover)
+        {
+            gunBase.canShootingObjective = true;
+        }
+        //BASHER MOVEMENT
+        else if (!_isBasher && isBasher && _canMove)
+        {
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
+            {
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+                _canMove = false;
+                _isBasher = true;
+                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
+                yield return new WaitForSeconds(movementSpeed);
+                gunBase.canShootingObjective = true;
+                _isBasher = false;
+                yield return new WaitForSeconds(stopDuration);
+                _canMove = true;
             }
         }
-        else
+        //FLASH MOVEMENT
+        else if (isFlash && _canMove)
         {
-            //StartCoroutine(StandStill());
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
+            {
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+                _canMove = false;
+                for (var x = 0; x < jumpPoints; x++)
+                {
+                    if (_point+x >= TriggerPoints.Count) _point = 0;
+                    gameObject.transform.DOMove(TriggerPoints[_point+x].transform.position, TimeBtwnPointsFlashs).SetEase(ease);
+                    yield return new WaitForSeconds(TimeStopPointsFlashs);
+                }
+                gunBase.canShootingObjective = true;
+                yield return new WaitForSeconds(stopDuration);
+                _canMove = true;
+            }
+        }
+        //DUGTRIO MOVEMENT
+        else if (isDugtrio && _canMove)
+        {
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
+            {
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+                _canMove = false;
+                undergroundState = true;
+                spriteTemp.color = Color.green;
+                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
+                yield return new WaitForSeconds(movementSpeed);
+                spriteTemp.color = Color.white;
+                gunBase.canShootingObjective = true;
+                undergroundState = false;
+                yield return new WaitForSeconds(stopDuration);
+                _canMove = true;
+            }
         }
     }
 
-    IEnumerator StandStill()
+    //JUMPER MOVEMENT
+    IEnumerator JumpToNextPlace()
     {
-        isWalking = true;
-        yield return new WaitForSeconds(standingStillTime);
-        isWalking = false;
-        yield return new WaitForSeconds(standingWalkingTime);
-        isWalking = true;
+        if (isJumper && _isJumper)
+        {
+            var pointNew = Random.Range(0, TriggerPoints.Count);
+            if (pointNew != _point)
+            {
+                _isJumper = false;
+                float jumpStopTime = Random.Range(jumpStopTimeMin, jumpStopTimeMax);
+                _point = pointNew;
+                gunBase.canShootingObjective = false;
+
+                gameObject.transform.position = TriggerPoints[_point].transform.position;
+                gunBase.canShootingObjective = true;
+                yield return new WaitForSeconds(jumpStopTime);
+                _isJumper = true;
+            }
+
+        }
+        else if (!isMover)
+        {
+            gunBase.canShootingObjective = true;
+        }
     }
+    #endregion
 
-    // Function to generate a random direction for the enemy
-    Vector2 RandomDirection()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Generate a random angle in degrees
-        float angle = Random.Range(0f, 360f);
-
-        // Convert the angle to radians
-        float radians = angle * Mathf.Deg2Rad;
-
-        // Calculate the x and y components of the direction vector using trigonometry
-        float x = Mathf.Cos(radians)*-1;
-        float y = Mathf.Sin(radians)*-1;
-
-        // Return the direction as a Vector2
-        return new Vector2(x, y);
-    }
-
-    // Function to change the direction of the enemy
-    void ChangeDirection()
-    {
-        // Generate a new random direction for the enemy
-        direction = RandomDirection();
+        if (collision.tag == "LineController" && _isBasher)
+        {
+            collision.GetComponent<HealthBase>().Damage(1);
+        }
     }
 }

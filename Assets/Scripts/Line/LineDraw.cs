@@ -15,9 +15,10 @@ public class LineDraw : Singleton<LineDraw>
 
     public GameObject GuardPrefab;
     public GameObject curentGuard;
-    public List<GameObject> EnemyOBJ;
     public int lineLenghtMax = 70;
-    private GameObject DialogueOBJ;
+
+    [Header("Enemys in Screen")]
+    public List<GameObject> EnemyOBJ;
 
     [SerializeField] private LineRenderer line;
     private EdgeCollider2D edgecollider;
@@ -186,7 +187,13 @@ public class LineDraw : Singleton<LineDraw>
             if (dist + EnemyTime.GetComponent<CircleCollider2D>().radius <= raggio)
             {
                 //Enemy detected
-                EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
+                
+                //check if the enemy is underground
+                if (EnemyTime.GetComponent<EnemyMovement>().undergroundState == false)
+                {
+                    EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
+                }
+
                 //break;
             }
         }
@@ -286,4 +293,15 @@ public class LineDraw : Singleton<LineDraw>
         audioSource.pitch = 1;
         audioSource.Pause();
     }
+
+    #region LIST ENEMYS CHANGE
+    public void AddEnemy(GameObject enemyObjAdd)
+    {
+        EnemyOBJ.Add(enemyObjAdd);
+    }
+    public void RemoveEnemy(GameObject enemyObjRemove)
+    {
+        EnemyOBJ.Remove(enemyObjRemove);
+    }
+    #endregion
 }
