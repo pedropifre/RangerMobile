@@ -45,11 +45,11 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    //teste 
-    [NaughtyAttributes.Button]
+  
     public void RemoveListing()
     {
         lineDraw.RemoveEnemy(gameObject);
+        
     }
     public void DamageEnemy(int damage=1)
     {
@@ -60,7 +60,7 @@ public class EnemyBase : MonoBehaviour
         if (healthBase._currentLife <= 0)
         {
             //remove da lista do line draw e depois deleta o GameObject
-            lineDraw.RemoveEnemy(gameObject);
+            
             Kill();
         }
     }
@@ -92,6 +92,7 @@ public class EnemyBase : MonoBehaviour
         sfxCatch.Play();
         particleCatch.Play();
         yield return new WaitForSeconds(vanishTime);
+        RemoveListing();
         Destroy(gameObject);
     }
 }

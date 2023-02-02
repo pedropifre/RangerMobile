@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+
+
+    [Header("Wave config")]
     public GameObject enemyPrefab; 
     public float spawnInterval = 5f; 
     public float spawnDuration = 300f; 
-    public Transform[] spawnPoints; 
+    public Transform[] spawnPoints;
+
+
 
     float elapsedTime; 
     public bool isSpawning = false;
@@ -30,8 +35,10 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
     }
+
     void Update()
     {
+        //wave Mode
         if (isSpawning)
         {
 
@@ -63,5 +70,11 @@ public class EnemySpawner : MonoBehaviour
                 elapsedTime = 0f;
             }
         }
+    
+        
+    }
+    public void spawnEnemy(GameObject enemyToSpawn)
+    {
+        Instantiate(enemyToSpawn, gameObject.transform);
     }
 }

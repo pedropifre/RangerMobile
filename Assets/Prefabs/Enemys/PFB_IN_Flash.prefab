@@ -334,12 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825ed9bc64637d0458fad9334ae7b1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriggerPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  TriggerPoints: []
   isMover: 1
   stopDuration: 3
   movementSpeed: 1.5
@@ -353,6 +348,9 @@ MonoBehaviour:
   jumpPoints: 4
   TimeStopPointsFlashs: 0.5
   TimeBtwnPointsFlashs: 0.5
+  isDugtrio: 0
+  undergroundState: 0
+  spriteTemp: {fileID: 0}
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +378,7 @@ Transform:
   m_GameObject: {fileID: 3338870486407329898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1506336, y: 0.1506336, z: 0.1506336}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 3338870486356549304}
   m_RootOrder: 0
@@ -425,7 +423,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4107765689181597746, guid: 2100e43782594004da59c4e6eae45d2a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d82af2eaf3e29b242bb61f35dd6713dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -446,7 +444,7 @@ Animator:
   m_GameObject: {fileID: 3338870486407329898}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7b26338fc94bd24896b9820e903b1d6, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
