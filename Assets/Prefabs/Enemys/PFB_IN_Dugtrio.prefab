@@ -282,7 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sO_Enemy: {fileID: 11400000, guid: 23aad2c812b2073408cb2b64c9d78b7d, type: 2}
   healthBase: {fileID: 278891339}
-  monsterNumb: 0
   particleCatch: {fileID: 8207401160435565716}
   lineDraw: {fileID: 0}
   sFXManager: {fileID: 0}
@@ -323,6 +322,7 @@ MonoBehaviour:
   _currentLife: 0
   damageMultiply: 1
   healthUI: {fileID: 0}
+  flashColor: {fileID: 0}
 --- !u!114 &1601113918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,8 +336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerPoints: []
-  isMover: 0
-  stopDuration: 5
+  isMover: 1
+  stopDuration: 10
   movementSpeed: 2
   ease: 1
   objAttack: {fileID: 3453586438234990927}
@@ -349,9 +349,9 @@ MonoBehaviour:
   jumpPoints: 0
   TimeStopPointsFlashs: 0
   TimeBtwnPointsFlashs: 0
-  isDugtrio: 0
+  isDugtrio: 1
   undergroundState: 0
-  spriteTemp: {fileID: 0}
+  spriteTemp: {fileID: 3338870486407329897}
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,8 +523,8 @@ MonoBehaviour:
   keyToShoot: 97
   _isShootingObjective: 0
   canShootingObjective: 0
-  timeBetweenShotMin: 2
-  timeBetweenShotMax: 4
+  timeBetweenShotMin: 6
+  timeBetweenShotMax: 8
   ammount: 1
   poolingShoots:
   - {fileID: 7185043367684400435}
@@ -532,7 +532,7 @@ MonoBehaviour:
   - {fileID: 7185043366027191883}
   - {fileID: 5611603728118567167}
   distanceToShoot: 3
-  timeBetweenShotObjective: 1
+  timeBetweenShotObjective: 7
   velocityObjective: 2
   recoil: 0.6
   shootDelay: 0

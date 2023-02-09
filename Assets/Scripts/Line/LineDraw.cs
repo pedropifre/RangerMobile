@@ -201,23 +201,7 @@ public class LineDraw : Singleton<LineDraw>
 
     }
 
-    public void RemoveFromList(int EnemyNumb)
-    {
-        
-        List<GameObject> enemysToRemove = new List<GameObject>();
-        foreach (var EnemyN in EnemyOBJ)
-        {
-            if (EnemyN.GetComponent<EnemyBase>().monsterNumb == EnemyNumb)
-            {
-                enemysToRemove.Add(EnemyN);
-            }
-        }
-        foreach (var y in enemysToRemove)
-        {
-            EnemyOBJ.Remove(y);
-        }
-    }
-
+ 
     //    Following method Calculate the Close Circle When the pokemon was detected
     void PlacementCenter()
     {

@@ -10,7 +10,6 @@ public class EnemyBase : MonoBehaviour
     public SO_Enemy sO_Enemy;
     private EnemyController enemymovement;
     public HealthBase healthBase;
-    public int monsterNumb;
     public ParticleSystem particleCatch;
     
 
@@ -35,6 +34,7 @@ public class EnemyBase : MonoBehaviour
     {
         //gameObject.GetComponent<AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Target").transform;
         lineDraw = GameObject.FindGameObjectWithTag("LineController").GetComponent<LineDraw>();
+        sFXManager = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<SFXManager>();
         lineDraw.AddEnemy(gameObject);
     }
     void Start()
@@ -53,15 +53,19 @@ public class EnemyBase : MonoBehaviour
     }
     public void DamageEnemy(int damage=1)
     {
-        healthBase.Damage(damage);
-        
-        lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph*damage), 1);
-
-        if (healthBase._currentLife <= 0)
+        if (healthBase._currentLife > 0)
         {
-            //remove da lista do line draw e depois deleta o GameObject
+
+            healthBase.Damage(damage);
+        
+            lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph*damage), 1);
+
+            if (healthBase._currentLife <= 0)
+            {
+                //remove da lista do line draw e depois deleta o GameObject
             
-            Kill();
+                Kill();
+            }
         }
     }
 

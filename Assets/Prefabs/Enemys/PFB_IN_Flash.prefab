@@ -281,7 +281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sO_Enemy: {fileID: 11400000, guid: 23aad2c812b2073408cb2b64c9d78b7d, type: 2}
   healthBase: {fileID: 278891339}
-  monsterNumb: 0
   particleCatch: {fileID: 8207401160435565716}
   lineDraw: {fileID: 0}
   sFXManager: {fileID: 0}
@@ -322,6 +321,7 @@ MonoBehaviour:
   _currentLife: 0
   damageMultiply: 1
   healthUI: {fileID: 0}
+  flashColor: {fileID: 0}
 --- !u!114 &1601113918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +346,8 @@ MonoBehaviour:
   isBasher: 0
   isFlash: 1
   jumpPoints: 4
-  TimeStopPointsFlashs: 0.5
-  TimeBtwnPointsFlashs: 0.5
+  TimeStopPointsFlashs: 0.2
+  TimeBtwnPointsFlashs: 0.4
   isDugtrio: 0
   undergroundState: 0
   spriteTemp: {fileID: 0}
@@ -522,15 +522,15 @@ MonoBehaviour:
   keyToShoot: 97
   _isShootingObjective: 0
   canShootingObjective: 0
-  timeBetweenShotMin: 2
-  timeBetweenShotMax: 4
+  timeBetweenShotMin: 6
+  timeBetweenShotMax: 8
   ammount: 1
   poolingShoots:
   - {fileID: 7185043367684400435}
   - {fileID: 7185043366104354360}
   - {fileID: 7185043366027191883}
   distanceToShoot: 3
-  timeBetweenShotObjective: 1.7
+  timeBetweenShotObjective: 5
   velocityObjective: 1
   recoil: 0.2
   shootDelay: 0

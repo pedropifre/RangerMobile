@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 3338870486356549306}
   - component: {fileID: 3338870486356549309}
   - component: {fileID: 278891339}
+  - component: {fileID: 3262557341954662345}
   m_Layer: 0
   m_Name: PFB_IN01
   m_TagString: Pokemon
@@ -280,7 +281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sO_Enemy: {fileID: 11400000, guid: 23aad2c812b2073408cb2b64c9d78b7d, type: 2}
   healthBase: {fileID: 278891339}
-  monsterNumb: 0
   particleCatch: {fileID: 8207401160435565716}
   lineDraw: {fileID: 0}
   sFXManager: {fileID: 0}
@@ -321,6 +321,36 @@ MonoBehaviour:
   _currentLife: 0
   damageMultiply: 1
   healthUI: {fileID: 0}
+  flashColor: {fileID: 0}
+--- !u!114 &3262557341954662345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3338870486356549308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ed9bc64637d0458fad9334ae7b1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerPoints: []
+  isMover: 0
+  stopDuration: 0
+  movementSpeed: 0
+  ease: 27
+  objAttack: {fileID: 0}
+  isJumper: 0
+  jumpStopTimeMax: 0
+  jumpStopTimeMin: 0
+  isBasher: 0
+  isFlash: 0
+  jumpPoints: 0
+  TimeStopPointsFlashs: 0
+  TimeBtwnPointsFlashs: 0
+  isDugtrio: 0
+  undergroundState: 0
+  spriteTemp: {fileID: 0}
 --- !u!1 &3338870486407329898
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +522,8 @@ MonoBehaviour:
   keyToShoot: 97
   _isShootingObjective: 0
   canShootingObjective: 0
-  timeBetweenShotMin: 2
-  timeBetweenShotMax: 4
+  timeBetweenShotMin: 10
+  timeBetweenShotMax: 12
   ammount: 1
   poolingShoots:
   - {fileID: 7185043367684400435}
@@ -669,7 +699,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8634126135330630396}
   serializedVersion: 7
-  lengthInSec: 1
+  lengthInSec: 0.21
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -913,7 +943,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1.04
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1494,7 +1524,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 110.23
+      scalar: 391.21
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5408,7 +5438,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.06
