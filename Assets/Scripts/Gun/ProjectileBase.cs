@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class ProjectileBase : MonoBehaviour
 {
     public GameObject direction;
@@ -16,12 +13,11 @@ public class ProjectileBase : MonoBehaviour
     [Header("Projectile config")]
     public float speedprojectile = 1;
     public float timeToDestroy = 2f;
+   
 
 
 
-    
     private GunBase gunBase;
-
     private void Awake()
     {
         //Destroy(gameObject, timeToDestroy);
@@ -70,14 +66,14 @@ public class ProjectileBase : MonoBehaviour
     //melhorar esse codigo, mudando a cor do castelo ao tomar dano
     IEnumerator DamageColor(GameObject objColor)
     {
-
-        //Change Color
-        Debug.Log("Inicio");
+        var color = objColor.GetComponent<SpriteRenderer>().color;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        objColor.GetComponent<SpriteRenderer>().color = new Color32(253, 151, 151, 255);
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
+        yield return new WaitForSeconds(.5f);
+        objColor.GetComponent<SpriteRenderer>().color = Color.white;
         gameObject.SetActive(false);
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-        Debug.Log("Fim");
-        yield return new WaitForSeconds(.2f);
 
     }
 }

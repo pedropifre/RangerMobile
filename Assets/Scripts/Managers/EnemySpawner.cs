@@ -57,6 +57,7 @@ public class EnemySpawner : MonoBehaviour
                 
                     GameObject enemySpawned =  Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
                     EnemysListLineCheck.GetComponent<LineDraw>().EnemyOBJ.Add(enemySpawned);
+                    enemySpawned.GetComponent<EnemyBase>().monsterNumb = SpawnedMonsters;
                     SpawnedMonsters++;
                 }
                 else

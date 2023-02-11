@@ -522,15 +522,15 @@ MonoBehaviour:
   keyToShoot: 97
   _isShootingObjective: 0
   canShootingObjective: 0
-  timeBetweenShotMin: 6
-  timeBetweenShotMax: 8
+  timeBetweenShotMin: 2
+  timeBetweenShotMax: 4
   ammount: 1
   poolingShoots:
   - {fileID: 7185043367684400435}
   - {fileID: 7185043366104354360}
   - {fileID: 7185043366027191883}
   distanceToShoot: 3
-  timeBetweenShotObjective: 10
+  timeBetweenShotObjective: 3
   velocityObjective: 2
   recoil: 0.3
   shootDelay: 0

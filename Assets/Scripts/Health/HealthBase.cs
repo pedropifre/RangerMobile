@@ -6,7 +6,6 @@ using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-
 public class HealthBase : MonoBehaviour, IDamagable
 {
     public float StartLife = 10f;
@@ -19,8 +18,6 @@ public class HealthBase : MonoBehaviour, IDamagable
     public float damageMultiply = 1f;
     public HealthUI healthUI;
 
-    [Header("FlashColor")]
-    public FlashColor flashColor;
 
 
 
@@ -28,10 +25,6 @@ public class HealthBase : MonoBehaviour, IDamagable
     private void Awake()
     {
         Init();
-        if (flashColor == null)
-        {
-            flashColor = GetComponent<FlashColor>();
-        }
     }
     public void Init()
     {
@@ -65,10 +58,6 @@ public class HealthBase : MonoBehaviour, IDamagable
         if (_currentLife <= 0)
         {
             //resolve destroing objective here
-        }
-        if (flashColor != null)
-        {
-            flashColor.Flash();
         }
     }
    
