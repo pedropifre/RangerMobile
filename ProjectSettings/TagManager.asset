@@ -9,6 +9,9 @@ TagManager:
   - Target
   - Objectives
   - WalkingTarget
+  - ColliderWall
+  - SFXManager
+  - ProjectileObjective
   layers:
   - Default
   - TransparentFX

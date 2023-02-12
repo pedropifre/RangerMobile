@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -27944446788926221}
   m_Layer: 0
   m_Name: PFB_Projectile_IN01
-  m_TagString: Untagged
+  m_TagString: ProjectileObjective
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

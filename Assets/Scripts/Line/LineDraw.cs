@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Ebac.Core.Singleton;
 using System.Linq;
 using SystemSFX;
+using TMPro;
 
 public class LineDraw : Singleton<LineDraw>
 {
@@ -40,6 +41,9 @@ public class LineDraw : Singleton<LineDraw>
 
     [Header("Audio Play")]
     public ParticleSystem particleBreak;
+
+    [Header("Damage text")]
+    public GameObject textDamage;
 
     // Structure for line points
     struct myLine { public Vector3 StartPoint; public Vector3 EndPoint; public Vector3 HalfPoint; };
@@ -192,8 +196,13 @@ public class LineDraw : Singleton<LineDraw>
                 if (EnemyTime.GetComponent<EnemyMovement>().undergroundState == false)
                 {
                     EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
+                    GameObject txtD = Instantiate(textDamage, EnemyTime.transform);
+                    txtD.GetComponent<TextDamageBase>().health = (int)EnemyTime.GetComponent<HealthBase>()._currentLife;
+                    txtD.GetComponent<TextDamageBase>().enemy = EnemyTime;
+                    txtD.GetComponent<TextDamageBase>().spawn();
+                
                 }
-
+                
                 //break;
             }
         }
@@ -201,23 +210,7 @@ public class LineDraw : Singleton<LineDraw>
 
     }
 
-    public void RemoveFromList(int EnemyNumb)
-    {
-        
-        List<GameObject> enemysToRemove = new List<GameObject>();
-        foreach (var EnemyN in EnemyOBJ)
-        {
-            if (EnemyN.GetComponent<EnemyBase>().monsterNumb == EnemyNumb)
-            {
-                enemysToRemove.Add(EnemyN);
-            }
-        }
-        foreach (var y in enemysToRemove)
-        {
-            EnemyOBJ.Remove(y);
-        }
-    }
-
+ 
     //    Following method Calculate the Close Circle When the pokemon was detected
     void PlacementCenter()
     {
