@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class HealthBase : MonoBehaviour, IDamagable
@@ -17,11 +18,15 @@ public class HealthBase : MonoBehaviour, IDamagable
     public Action<HealthBase> OnKill;
 
     public float damageMultiply = 1f;
-    public HealthUI healthUI;
 
     [Header("FlashColor")]
     public FlashColor flashColor;
 
+    [Header("UILife")]
+    public TextMeshProUGUI currentLife;
+    public TextMeshProUGUI MaxLife;
+    public Image lifeBar;
+    private float _LifeDropGraph;
 
 
 
@@ -32,10 +37,17 @@ public class HealthBase : MonoBehaviour, IDamagable
         {
             flashColor = GetComponent<FlashColor>();
         }
+        _LifeDropGraph = StartLife / 1;
     }
     public void Init()
     {
         ResetLife();
+        UpdateLife();
+        if (MaxLife)
+        {
+            MaxLife.text = "/" + StartLife.ToString();
+        }
+        
     }
 
 
@@ -45,26 +57,36 @@ public class HealthBase : MonoBehaviour, IDamagable
         
     }
 
-
+    public void UpdateLife()
+    {
+        if (currentLife != null)
+        {
+            currentLife.text = _currentLife.ToString();
+            lifeBar.fillAmount = _currentLife/StartLife;
+            Debug.Log(lifeBar.fillAmount);
+        }
+    }
  
     public void heal(float f)
     {
         _currentLife += f;
-        Debug.Log("HealthBase");
+        UpdateLife();
     }
     public void Damage(float f=1)
     {
 
         _currentLife -= f * damageMultiply;
         OnDamage?.Invoke(this);
-
-        if (healthUI != null)
-        {
-            healthUI.UpdateLifeUI();
-        }
+        //update UI
+        UpdateLife();
+        
         if (_currentLife <= 0)
         {
             //resolve destroing objective here
+            if (gameObject.tag == "LineController")
+            {
+                //game over screen
+            }
         }
         if (flashColor != null)
         {

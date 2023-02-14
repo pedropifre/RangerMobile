@@ -197,7 +197,10 @@ public class LineDraw : Singleton<LineDraw>
                 {
                     EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
                     GameObject txtD = Instantiate(textDamage, EnemyTime.transform);
-                    txtD.GetComponent<TextDamageBase>().health = (int)EnemyTime.GetComponent<HealthBase>()._currentLife;
+                    //mostrar vida restante
+                    //txtD.GetComponent<TextDamageBase>().health = (int)EnemyTime.GetComponent<HealthBase>()._currentLife;
+                    //mostar dano sofrido -------- trocar dano pra personalizar com multiplicador
+                    txtD.GetComponent<TextDamageBase>().health = 1;
                     txtD.GetComponent<TextDamageBase>().enemy = EnemyTime;
                     txtD.GetComponent<TextDamageBase>().spawn();
                 

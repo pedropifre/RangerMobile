@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcf60cb737ce7549b0b22ffde43a699, type: 3}
+  m_Name: CapaceteTeste
+  m_EditorClassIdentifier: 
+  nameGear: CapaceteInicial
+  damageMultiply: 2
+  defenseMultiply: 2
+  level: 1
+  iconGear: {fileID: 0}
