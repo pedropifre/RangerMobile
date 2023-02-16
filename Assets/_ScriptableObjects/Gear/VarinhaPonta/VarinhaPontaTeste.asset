@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dcf60cb737ce7549b0b22ffde43a699, type: 3}
-  m_Name: CapaceteTeste
+  m_Name: VarinhaPontaTeste
   m_EditorClassIdentifier: 
-  nameGear: CapaceteInicial
-  damageMultiply: 1
+  nameGear: VarinhaPontaTeste
+  damageMultiply: 0
   defenseMultiply: 2
   level: 1
   iconGear: {fileID: 0}

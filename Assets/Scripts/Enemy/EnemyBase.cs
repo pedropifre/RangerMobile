@@ -57,8 +57,8 @@ public class EnemyBase : MonoBehaviour
         {
 
             healthBase.Damage(damage);
-        
-            lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph*damage), 1);
+            if (lifeBar.size.x - (_LifeDropGraph * damage) < 0) lifeBar.size = new Vector2(0, 1);
+            else lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph*damage), 1);
 
             if (healthBase._currentLife <= 0)
             {

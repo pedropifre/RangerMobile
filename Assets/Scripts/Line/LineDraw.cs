@@ -7,6 +7,7 @@ using System.Linq;
 using SystemSFX;
 using TMPro;
 
+
 public class LineDraw : Singleton<LineDraw>
 {
 
@@ -43,8 +44,12 @@ public class LineDraw : Singleton<LineDraw>
     public ParticleSystem particleBreak;
 
     [Header("Damage text")]
+    public float damageTotal;
     public GameObject textDamage;
 
+    [Header("Manager")]
+    public _SOPlayer SOPlayer;
+    private CalculateDamage calculateDamage;
     // Structure for line points
     struct myLine { public Vector3 StartPoint; public Vector3 EndPoint; public Vector3 HalfPoint; };
 
@@ -195,12 +200,14 @@ public class LineDraw : Singleton<LineDraw>
                 //check if the enemy is underground
                 if (EnemyTime.GetComponent<EnemyMovement>().undergroundState == false)
                 {
-                    EnemyTime.GetComponent<EnemyBase>().DamageEnemy(1);
+                    //calcular damage
+                    GetDamage();
+                    EnemyTime.GetComponent<EnemyBase>().DamageEnemy((int)damageTotal);
                     GameObject txtD = Instantiate(textDamage, EnemyTime.transform);
                     //mostrar vida restante
                     //txtD.GetComponent<TextDamageBase>().health = (int)EnemyTime.GetComponent<HealthBase>()._currentLife;
                     //mostar dano sofrido -------- trocar dano pra personalizar com multiplicador
-                    txtD.GetComponent<TextDamageBase>().health = 1;
+                    txtD.GetComponent<TextDamageBase>().health = (int)damageTotal;
                     txtD.GetComponent<TextDamageBase>().enemy = EnemyTime;
                     txtD.GetComponent<TextDamageBase>().spawn();
                 
@@ -213,6 +220,14 @@ public class LineDraw : Singleton<LineDraw>
 
     }
 
+    public void GetDamage()
+    {
+        //base
+        damageTotal = 1;
+        //Equipament
+        damageTotal += (int)CalculateDamage.Instance.damage();
+        //PowerUp
+    }
  
     //    Following method Calculate the Close Circle When the pokemon was detected
     void PlacementCenter()

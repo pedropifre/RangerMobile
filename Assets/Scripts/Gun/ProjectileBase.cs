@@ -72,11 +72,11 @@ public class ProjectileBase : MonoBehaviour
     {
 
         //Change Color
-        Debug.Log("Inicio");
+        //Debug.Log("Inicio");
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
         gameObject.SetActive(false);
         gameObject.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-        Debug.Log("Fim");
+        //Debug.Log("Fim");
         yield return new WaitForSeconds(.2f);
 
     }

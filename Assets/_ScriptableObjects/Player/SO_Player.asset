@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caae22ac3b5632f4e886e42daba7e507, type: 3}
   m_Name: SO_Player
   m_EditorClassIdentifier: 
-  varinhaBase: {fileID: 11400000, guid: dc09e621fd1e84b4eb70fb3e5e89e3dd, type: 2}
-  varinhaPonta: {fileID: 0}
-  Peitoral: {fileID: 0}
-  Capacete: {fileID: 0}
-  Pernas: {fileID: 0}
-  tenis: {fileID: 0}
-  powerUp: 0
-  skill: 0
+  varinhaBase: {fileID: 11400000, guid: 873730b0c7cb6ba468cd020c6a2f6577, type: 2}
+  varinhaPonta: {fileID: 11400000, guid: 976aea8d1c542f84596b47860babd18a, type: 2}
+  Peitoral: {fileID: 11400000, guid: 193cdf88e1dd78041aa4874cf4cfd77b, type: 2}
+  Capacete: {fileID: 11400000, guid: dc09e621fd1e84b4eb70fb3e5e89e3dd, type: 2}
+  Pernas: {fileID: 11400000, guid: 0d76752748c73b246a1d71bf3335a08b, type: 2}
+  tenis: {fileID: 11400000, guid: 9f32edaad11e4cc4a8c46f3f322de71b, type: 2}
+  powerUp: 1
+  skill: 1
