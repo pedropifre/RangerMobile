@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
+
 
 namespace TimeManagementSpace
 {
@@ -19,48 +19,60 @@ namespace TimeManagementSpace
         [Header("Monsters to spawn")]
         public List<MonsterToSpawn> monsterToSpawn;
         private int waveCount;
+        private bool running = true;
+        public LineDraw lineGuard;
+
+        [SerializeField] private GameObject[] spawnPoints;
         
         void Start()
         {
             timer = timeInSeconds;
             intervalTimer =timeInSeconds/monsterToSpawn.Count;
+            spawnPoints = GameObject.FindGameObjectsWithTag("WalkingTarget");
+            lineGuard = GameObject.FindGameObjectWithTag("LineController").GetComponent<LineDraw>();
 
         }
 
         void Update()
         {
-            timer -= Time.deltaTime;
-            intervalTimer -= Time.deltaTime;
-
-            //update the monster timer
-            foreach (var x in monsterToSpawn)
+            if (running)
             {
-                x.timeToSpawn -= Time.deltaTime;
-                if (x.timeToSpawn <= 0 )
+                timer -= Time.deltaTime;
+                intervalTimer -= Time.deltaTime;
+
+                //update the monster timer
+                foreach (var x in monsterToSpawn)
                 {
-                    spawnMonsters(x.pfbEnemys);
-                    monsterToSpawn.Remove(x);
-                    break;
+                    x.timeToSpawn -= Time.deltaTime;
+                    if (x.timeToSpawn <= 0 )
+                    {
+                        spawnMonsters(x.pfbEnemys);
+                        monsterToSpawn.Remove(x);
+                        break;
+                    }
+
                 }
+                //Para não deixar o jogo parado, se o jogador ja tiver capturado todos os inimigos da wave
+                //ela adianta para a próxima wave, assim deixando tempo para o jogador bater o recorde de tempo
+                var enemyCount = lineGuard.ReturnEnCount();
+                if (enemyCount == 0 && timeInSeconds>0 && monsterToSpawn.Count>0)
+                {
 
-            }
+                    spawnMonsters(monsterToSpawn[0].pfbEnemys);
+                    monsterToSpawn.Remove(monsterToSpawn[0]);
+                }
+                // update the timer display
+                int minutes = Mathf.FloorToInt(timer / 60f);
+                int seconds = Mathf.FloorToInt(timer % 60f);
+                timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
 
-            // update the timer display
-            int minutes = Mathf.FloorToInt(timer / 60f);
-            int seconds = Mathf.FloorToInt(timer % 60f);
-            timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+                
 
-            // run the function at the set interval
-            if (intervalTimer <= 0f)
-            {
-                FunctionToRun();
-                intervalTimer = intervalInSeconds;
-            }
-
-            // end the timer when it reaches 0
-            if (timer <= 0f)
-            {
-                EndTimer();
+                // end the timer when it reaches 0
+                if (timer <= 0f)
+                {
+                    EndTimer();
+                }
             }
         }
 
@@ -68,7 +80,8 @@ namespace TimeManagementSpace
         {
             foreach (var c in list)
             {
-                Instantiate(c);
+                var spawnRandom = Random.Range(0, spawnPoints.Length - 1);
+                Instantiate(c,spawnPoints[spawnRandom].transform.position,Quaternion.identity);
             }
         }
 
@@ -83,6 +96,25 @@ namespace TimeManagementSpace
         void EndTimer()
         {
             Debug.Log("Timer ended.");
+            running=false;
+        }
+
+        public int ReturnMonstersLeft()
+        {
+            var monstersLeft = 0;
+            var monsterField = lineGuard.ReturnEnCount();
+            if (monsterToSpawn.Count == 0 && monsterField == 0)return monstersLeft;
+            else
+            {
+                //monsters to be spawned
+                foreach(var b in monsterToSpawn)
+                {
+                    monstersLeft += b.pfbEnemys.Count;
+                }
+                //moster in the field
+                monstersLeft += monsterField;
+                return monstersLeft;
+            }
         }
     }
     [System.Serializable]

@@ -256,7 +256,7 @@ Transform:
   m_GameObject: {fileID: 3338870486356549308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23, y: 2.85, z: -1.5949296}
-  m_LocalScale: {x: 0.7235, y: 0.7235, z: 0.7235}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.7235}
   m_Children:
   - {fileID: 3338870486407329899}
   - {fileID: 3338870485956239386}
@@ -283,6 +283,7 @@ MonoBehaviour:
   sO_Enemy: {fileID: 11400000, guid: 23aad2c812b2073408cb2b64c9d78b7d, type: 2}
   healthBase: {fileID: 278891339}
   particleCatch: {fileID: 8207401160435565716}
+  gunBase: {fileID: 6877379183827308207}
   lineDraw: {fileID: 0}
   sFXManager: {fileID: 0}
   sfxCatch: {fileID: 4755339997585972776}
@@ -523,8 +524,9 @@ MonoBehaviour:
   positionObjectives: []
   target: {fileID: 0}
   keyToShoot: 97
-  _isShootingObjective: 0
   canShootingObjective: 0
+  canShootAll: 1
+  _isShootingObjective: 0
   timeBetweenShotMin: 8
   timeBetweenShotMax: 10
   ammount: 1

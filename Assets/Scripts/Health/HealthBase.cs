@@ -63,7 +63,6 @@ public class HealthBase : MonoBehaviour, IDamagable
         {
             currentLife.text = _currentLife.ToString();
             lifeBar.fillAmount = _currentLife/StartLife;
-            Debug.Log(lifeBar.fillAmount);
         }
     }
  

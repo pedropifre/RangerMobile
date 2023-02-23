@@ -19,8 +19,9 @@ public class GunBase : MonoBehaviour
 
     public KeyCode keyToShoot;
     private bool _isShooting = false;
+    public bool canShootingObjective = false; //to other scrit can deactivate the shooting bit
+    public bool canShootAll = true; //to other scrit can deactivate the shooting bit
     [SerializeField] private bool _isShootingObjective = false;
-    [SerializeField] public bool canShootingObjective = false; //to other scrit can deactivate the shooting bit
 
     [Header("Projectile config")]
     public float timeBetweenShotMin = .3f;
@@ -88,12 +89,12 @@ public class GunBase : MonoBehaviour
             //Debug.Log(hit.collider);
 
             //check the distance between the enemy and the line
-            if (hit.collider != null && hit.collider.tag == "LineController")
+            if (hit.collider != null && hit.collider.tag == "LineController" && canShootAll)
             {
                 float distance = Vector2.Distance(transform.position, hit.point);
 
                 Debug.Log("Monster = " + gameObject.name + " Distance = " + distance);
-                if (distance < distanceToShoot)
+                if (distance < distanceToShoot )
                 {
                     //Debug.Log("Monster "+gameObject.name+" Atirar");
                     StartCoroutine(StartShoot());
@@ -102,7 +103,7 @@ public class GunBase : MonoBehaviour
             }
 
         }
-        else
+        else if(canShootAll)
         {
             StartCoroutine(StartShootObjective());
             
@@ -188,19 +189,12 @@ public class GunBase : MonoBehaviour
         }
 
     }
-
-
-    //Shot when detects line in collider
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "LineController")
-    //    {
-    //        //courotine of attack
-    //        StartCoroutine(StartShoot());
-    //        //Debug.Log("Attack");
-    //    }
-
-    //}
+    //when dead
+    public void StopShoting()
+    {
+        StopAllCoroutines();
+        canShootAll = false;
+    }
     void OnDrawGizmos()
     {
         if (hit.collider != null)

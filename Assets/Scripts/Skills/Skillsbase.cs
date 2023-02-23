@@ -41,8 +41,12 @@ namespace SkillBase
                 Debug.Log("Damage");
                 foreach (var i in arrayInimigos)
                 {
-                    i.GetComponent<EnemyBase>().DamageEnemy(1);
-                    yield return new WaitForSeconds(skillTime / PHits);
+                    if (i.GetComponent<HealthBase>()._currentLife > 0)
+                    {
+                        i.GetComponent<EnemyBase>().DamageEnemy(1);
+                        yield return new WaitForSeconds(skillTime / PHits);
+                    }
+                    
                 }
 
             }

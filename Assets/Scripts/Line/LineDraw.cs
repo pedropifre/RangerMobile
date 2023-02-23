@@ -76,7 +76,7 @@ public class LineDraw : Singleton<LineDraw>
             isMousePressed = true;
             audioSource.pitch = 1;
             audioSource.Play();
-            curentGuard = Instantiate(GuardPrefab, Vector3.zero, Quaternion.identity);
+            curentGuard = Instantiate(GuardPrefab, new Vector3(0,0,2), Quaternion.identity);
         }
 
         if (Input.GetMouseButtonUp(0) || Input.touchCount >= 2)
@@ -313,6 +313,10 @@ public class LineDraw : Singleton<LineDraw>
     public void RemoveEnemy(GameObject enemyObjRemove)
     {
         EnemyOBJ.Remove(enemyObjRemove);
+    }
+    public int ReturnEnCount()
+    {
+        return EnemyOBJ.Count;
     }
     #endregion
 }

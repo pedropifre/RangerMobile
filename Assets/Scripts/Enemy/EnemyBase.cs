@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Core.Singleton;
 using SystemSFX;
+using DG.Tweening;
 using NaughtyAttributes;
 
 public class EnemyBase : MonoBehaviour
@@ -11,6 +12,7 @@ public class EnemyBase : MonoBehaviour
     private EnemyController enemymovement;
     public HealthBase healthBase;
     public ParticleSystem particleCatch;
+    public GunBase gunBase;
     
 
 
@@ -42,6 +44,9 @@ public class EnemyBase : MonoBehaviour
 
         enemymovement = this.GetComponent<EnemyController>();
         _LifeDropGraph = (float)1 / healthBase._currentLife;
+        var scalaInicial = gameObject.transform.localScale;
+        gameObject.transform.localScale = Vector2.zero;
+        gameObject.transform.DOScale(scalaInicial,1f).SetEase(Ease.OutBack);
     }
 
 
@@ -90,8 +95,10 @@ public class EnemyBase : MonoBehaviour
         
         
     }
+
     IEnumerator KillCourotine()
     {
+        gunBase.StopShoting();
         sfxCatch.clip = sFXManager.PlaySFX("Catch");
         sfxCatch.Play();
         particleCatch.Play();
