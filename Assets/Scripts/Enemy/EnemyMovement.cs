@@ -39,16 +39,21 @@ public class EnemyMovement : MonoBehaviour
     
     private GunBase gunBase;
     private int _point;
-
+    private bool moverOriginal;
+    private IEnumerator enumerator;
+    private IEnumerator enumeratorJ;
+    
 
     public void Awake()
     {
-        
+        moverOriginal = isMover;
         var triggerList = GameObject.FindGameObjectsWithTag("WalkingTarget");
         foreach (var i in triggerList)
         {
             TriggerPoints.Add(i.transform);
         }
+        enumerator = MoveToNextPlace();
+        enumeratorJ = MoveToNextPlace();
     }
     private void Start()
     {
@@ -57,15 +62,17 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isJumper)  StartCoroutine(MoveToNextPlace());
-        else if(isJumper) StartCoroutine(JumpToNextPlace());
-        
+
+        if (!isJumper) StartCoroutine(MoveToNextPlace());
+        else if (isJumper) StartCoroutine(JumpToNextPlace());
     }
+
 
     #region Movement
 
     IEnumerator MoveToNextPlace()
     {
+        Sequence mySequence = DOTween.Sequence();
         //NORMAL MOVEMENT
         if (_canMove && isMover && !isBasher && !isFlash && !isDugtrio)
         {
@@ -75,7 +82,8 @@ public class EnemyMovement : MonoBehaviour
                 _point = pointNew;
                 gunBase.canShootingObjective = false;
                 _canMove = false;
-                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease); 
+                gameObject.transform.
+                    DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease); 
                 yield return new WaitForSeconds(movementSpeed);
                 gunBase.canShootingObjective = true;
                 yield return new WaitForSeconds(stopDuration);
@@ -97,7 +105,8 @@ public class EnemyMovement : MonoBehaviour
                 gunBase.canShootingObjective = false;
                 _canMove = false;
                 _isBasher = true;
-                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
+                gameObject.transform.
+                    DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
                 yield return new WaitForSeconds(movementSpeed);
                 gunBase.canShootingObjective = true;
                 _isBasher = false;
@@ -117,7 +126,8 @@ public class EnemyMovement : MonoBehaviour
                 for (var x = 0; x < jumpPoints; x++)
                 {
                     if (_point+x >= TriggerPoints.Count) _point = 0;
-                    gameObject.transform.DOMove(TriggerPoints[_point+x].transform.position, TimeBtwnPointsFlashs).SetEase(ease);
+                    gameObject.transform.
+                        DOMove(TriggerPoints[_point+x].transform.position, TimeBtwnPointsFlashs).SetEase(ease);
                     yield return new WaitForSeconds(TimeStopPointsFlashs);
                 }
                 gunBase.canShootingObjective = true;
@@ -136,7 +146,8 @@ public class EnemyMovement : MonoBehaviour
                 _canMove = false;
                 undergroundState = true;
                 spriteTemp.color = Color.green;
-                gameObject.transform.DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
+                gameObject.transform.
+                    DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease);
                 yield return new WaitForSeconds(movementSpeed);
                 spriteTemp.color = Color.white;
                 gunBase.canShootingObjective = true;
@@ -174,6 +185,21 @@ public class EnemyMovement : MonoBehaviour
     }
     #endregion
 
+    public void StartTunder()
+    {
+        StopCoroutine(enumerator);
+        StopCoroutine(enumeratorJ);
+        DOTween.KillAll();
+        foreach (var i in gunBase.poolingShoots)i.SetActive(false);
+        var moverOriginal = isMover;
+        isMover = false;
+    }
+    public void StopTunder()
+    {
+        isMover = moverOriginal;
+        StartCoroutine(enumerator);
+        StartCoroutine(enumeratorJ);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

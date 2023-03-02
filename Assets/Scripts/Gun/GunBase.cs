@@ -93,11 +93,11 @@ public class GunBase : MonoBehaviour
             {
                 float distance = Vector2.Distance(transform.position, hit.point);
 
-                Debug.Log("Monster = " + gameObject.name + " Distance = " + distance);
+                //Debug.Log("Monster = " + gameObject.name + " Distance = " + distance);
                 if (distance < distanceToShoot )
                 {
                     //Debug.Log("Monster "+gameObject.name+" Atirar");
-                    StartCoroutine(StartShoot());
+                    //StartCoroutine(StartShoot());
                 }
                 
             }
@@ -192,6 +192,10 @@ public class GunBase : MonoBehaviour
     //when dead
     public void StopShoting()
     {
+        foreach (var b in poolingShoots)
+        {
+            Destroy(b);
+        }
         StopAllCoroutines();
         canShootAll = false;
     }

@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Ebac.Core.Singleton;
 
 namespace SkillBase
 {
 
-    public class Skillsbase : MonoBehaviour
+    public class Skillsbase : Singleton<Skillsbase>
     {
         public float skillTime = 5f;
         public float skillCoolDown = 5f;
         //private GameObject SkillChoosen;
         public _SOPlayer sOPlayer;
+        
+
+        [Header("UI")]
+        public GameObject uiSkills;
+        public HideUI uiScript;
 
         [Header("Poison")]
         public int PHits;
+        public ParticleSystem poisonParticles;
+
+        
+        [Header("Thunder")]
+        public int stunTime;
+        public ParticleSystem stunParticles;
 
         private void Awake()
         {
@@ -29,13 +41,32 @@ namespace SkillBase
 
         public void PoisonEffect()
         {
+            uiScript.HideUIInt(uiSkills);
             GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
             Debug.Log("Click skill");
             StartCoroutine(damagePoison(inimigos));
         }
+        
+        public void StunEffect()
+        {
+            uiScript.HideUIInt(uiSkills);
+            GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
+            StartCoroutine(StunCourotine(inimigos));
+        }
+        public void AvadakedavraEffect()
+        {
+
+        }
 
         IEnumerator damagePoison(GameObject[] arrayInimigos)
         {
+            foreach (var i in arrayInimigos)
+            {
+
+                var part = Instantiate(poisonParticles, new Vector3(i.transform.position.x,
+                    i.transform.position.y, -1), Quaternion.identity);
+                Destroy(part, skillTime);
+            }
             for (var y = 1 ; y <= PHits ; y++)
             {
                 Debug.Log("Damage");
@@ -44,20 +75,37 @@ namespace SkillBase
                     if (i.GetComponent<HealthBase>()._currentLife > 0)
                     {
                         i.GetComponent<EnemyBase>().DamageEnemy(1);
-                        yield return new WaitForSeconds(skillTime / PHits);
+                        yield return new WaitForSeconds(skillTime / PHits /arrayInimigos.Length);
                     }
                     
                 }
 
             }
+           
         }
-        public void StunEffect()
+        IEnumerator StunCourotine(GameObject[] arrayInimigos)
         {
+            foreach (var i in arrayInimigos)
+            {
 
-        }
-        public void AvadakedavraEffect()
-        {
-
+                var part = Instantiate(stunParticles, new Vector3(i.transform.position.x,
+                    i.transform.position.y, -1), Quaternion.identity);
+                Destroy(part.gameObject,stunTime);
+            }
+            foreach (var i in arrayInimigos)
+            {
+                if (i.GetComponent<HealthBase>()._currentLife > 0)
+                {
+                    i.GetComponent<EnemyMovement>().StartTunder();
+                    i.GetComponent<EnemyBase>().ChangeShoting();
+                }
+            }
+            yield return new WaitForSeconds(stunTime);
+            foreach (var i in arrayInimigos)
+            {
+                i.GetComponent<EnemyMovement>().StopTunder();
+                i.GetComponent<EnemyBase>().ChangeShoting();
+            }
         }
     }
 }

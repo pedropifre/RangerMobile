@@ -51,9 +51,16 @@ public class LineDraw : Singleton<LineDraw>
     public _SOPlayer SOPlayer;
     private CalculateDamage calculateDamage;
     // Structure for line points
+
+    [Header("Combo")]
+    public int comboInt = 0;
+    private int comboValue = 0;
+    public int maxCombo;
+    public ComboManager comboManager;
+
     struct myLine { public Vector3 StartPoint; public Vector3 EndPoint; public Vector3 HalfPoint; };
 
-    void Awake()
+    void Start()
     {
 
         line = gameObject.GetComponent<LineRenderer>();
@@ -61,7 +68,6 @@ public class LineDraw : Singleton<LineDraw>
         line.useWorldSpace = true;
         isMousePressed = false;
         pointsList = new List<Vector2>();
-
         audioSource = this.GetComponent<AudioSource>();
     }
 
@@ -202,6 +208,7 @@ public class LineDraw : Singleton<LineDraw>
                 {
                     //calcular damage
                     GetDamage();
+                    comboManager.SetComboCourotine(comboValue);
                     EnemyTime.GetComponent<EnemyBase>().DamageEnemy((int)damageTotal);
                     GameObject txtD = Instantiate(textDamage, EnemyTime.transform);
                     //mostrar vida restante
@@ -226,7 +233,16 @@ public class LineDraw : Singleton<LineDraw>
         damageTotal = 1;
         //Equipament
         damageTotal += (int)CalculateDamage.Instance.damage();
-        //PowerUp
+        //Combo
+        comboValue = comboInt;
+        if (comboValue > maxCombo) comboValue = maxCombo;
+        damageTotal += comboValue;
+        comboInt++;
+    }
+
+    public void ResetCombo()
+    {
+        comboInt=1;
     }
  
     //    Following method Calculate the Close Circle When the pokemon was detected
@@ -292,8 +308,10 @@ public class LineDraw : Singleton<LineDraw>
     //    Following method destroy all Line's object 
     public void DestroyElement()
     {
-  
-        
+        //combo related
+        ResetCombo();
+        comboManager.Hide();
+        //line related
         Destroy(curentGuard); 
         pointsList.Clear();
         isMousePressed = false; 

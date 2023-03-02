@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Ebac.Core.Singleton;
 using SystemSFX;
 using DG.Tweening;
-using NaughtyAttributes;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -49,7 +46,10 @@ public class EnemyBase : MonoBehaviour
         gameObject.transform.DOScale(scalaInicial,1f).SetEase(Ease.OutBack);
     }
 
-
+    public void ChangeShoting()
+    {
+        gunBase.canShootAll = (gunBase.canShootAll == true) ? false : true;
+    }
   
     public void RemoveListing()
     {

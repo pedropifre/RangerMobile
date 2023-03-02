@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CapaceteTeste
   m_EditorClassIdentifier: 
   nameGear: CapaceteInicial
-  damageMultiply: 1
+  damageMultiply: 0
   defenseMultiply: 2
   level: 1
   iconGear: {fileID: 0}

@@ -116,6 +116,11 @@ namespace TimeManagementSpace
                 return monstersLeft;
             }
         }
+
+        public string ReturnTimeLeft()
+        {
+            return timerText.text;
+        }
     }
     [System.Serializable]
     public class MonsterToSpawn
