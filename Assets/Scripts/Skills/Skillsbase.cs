@@ -27,6 +27,11 @@ namespace SkillBase
         public int stunTime;
         public ParticleSystem stunParticles;
 
+        [Header("Death")]
+        public ParticleSystem DeathParticles;
+        public float DeathLagTime;
+        public float DeathTime;
+
         private void Awake()
         {
             //SkillChoosen = GameObject.FindGameObjectWithTag("LineRenderer");
@@ -55,7 +60,9 @@ namespace SkillBase
         }
         public void AvadakedavraEffect()
         {
-
+            uiScript.HideUIInt(uiSkills);
+            GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
+            StartCoroutine(AvadaCourotine(inimigos));
         }
 
         IEnumerator damagePoison(GameObject[] arrayInimigos)
@@ -106,6 +113,27 @@ namespace SkillBase
                 i.GetComponent<EnemyMovement>().StopTunder();
                 i.GetComponent<EnemyBase>().ChangeShoting();
             }
+        }
+
+        IEnumerator AvadaCourotine(GameObject[] arrayInimigos)
+        {
+            foreach (var i in arrayInimigos)
+            {
+
+                var part = Instantiate(stunParticles, new Vector3(i.transform.position.x,
+                    i.transform.position.y, -1), Quaternion.identity);
+                Destroy(part.gameObject, stunTime);
+            }
+            foreach (var i in arrayInimigos)
+            {
+                if (i.GetComponent<HealthBase>()._currentLife > 0)
+                {
+                    var curren = i.GetComponent<HealthBase>()._currentLife;
+                    i.GetComponent<EnemyBase>().DamageEnemy((int)curren);
+                }
+                yield return new WaitForSeconds(DeathLagTime);
+            }
+            
         }
     }
 }
