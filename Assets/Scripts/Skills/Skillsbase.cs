@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Core.Singleton;
+using UnityEngine.UI;
+using TimeManagementSpace;
 
 namespace SkillBase
 {
@@ -27,42 +29,79 @@ namespace SkillBase
         public int stunTime;
         public ParticleSystem stunParticles;
 
+
         [Header("Death")]
         public ParticleSystem DeathParticles;
         public float DeathLagTime;
         public float DeathTime;
 
-        private void Awake()
+
+        [Header("Time to unlock powerups")]
+        public TimeManager timeManager;
+        public List<ButtonType> btnType;
+
+
+        private void Start()
         {
-            //SkillChoosen = GameObject.FindGameObjectWithTag("LineRenderer");
+            foreach (var t in btnType)
+            {
+                t.btn.enabled = false;
+                t.btn.image.color = Color.red;
+            }
         }
 
-        public void DoEffect()
+        public void turnButtonOn(string nameToUnlock)
         {
-            if (sOPlayer.skill == 1) PoisonEffect();
-            else if (sOPlayer.skill == 2) StunEffect();
-            else if (sOPlayer.skill == 3) AvadakedavraEffect();
+            foreach (var t in btnType)
+            {
+                if (nameToUnlock == t.nameBtn)
+                {
+                    t.btn.enabled = true;
+                    t.btn.image.color = Color.white;
+                }
+            }
         }
+        
+        public void turnButtonOff(string nameToUnlock)
+        {
+            foreach (var t in btnType)
+            {
+                if (nameToUnlock == t.nameBtn)
+                {
+                    t.btn.enabled = false;
+                    t.btn.image.color = Color.red;
+                }
+            }
+        }
+
 
         public void PoisonEffect()
         {
             uiScript.HideUIInt(uiSkills);
+            turnButtonOff("Poison");
             GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
             Debug.Log("Click skill");
             StartCoroutine(damagePoison(inimigos));
-        }
-        
+            //time manager
+            timeManager.isPwpUsed("Poison");
+        }    
         public void StunEffect()
         {
+            turnButtonOff("Thunder");
             uiScript.HideUIInt(uiSkills);
             GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
             StartCoroutine(StunCourotine(inimigos));
+            //time manager
+            timeManager.isPwpUsed("Thunder");
         }
         public void AvadakedavraEffect()
         {
+            turnButtonOff("Death");
             uiScript.HideUIInt(uiSkills);
             GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Pokemon");
             StartCoroutine(AvadaCourotine(inimigos));
+            //time manager
+            timeManager.isPwpUsed("Death");
         }
 
         IEnumerator damagePoison(GameObject[] arrayInimigos)
@@ -72,7 +111,7 @@ namespace SkillBase
 
                 var part = Instantiate(poisonParticles, new Vector3(i.transform.position.x,
                     i.transform.position.y, -1), Quaternion.identity);
-                Destroy(part, skillTime);
+                Destroy(part.gameObject, skillTime);
             }
             for (var y = 1 ; y <= PHits ; y++)
             {
@@ -114,7 +153,6 @@ namespace SkillBase
                 i.GetComponent<EnemyBase>().ChangeShoting();
             }
         }
-
         IEnumerator AvadaCourotine(GameObject[] arrayInimigos)
         {
             foreach (var i in arrayInimigos)
@@ -135,5 +173,12 @@ namespace SkillBase
             }
             
         }
+    }
+
+    [System.Serializable]
+    public class ButtonType
+    {
+        public Button btn;
+        public string nameBtn;
     }
 }

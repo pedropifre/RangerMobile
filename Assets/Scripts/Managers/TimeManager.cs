@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using SkillBase;
+using UnityEngine.UI;
 
 namespace TimeManagementSpace
 {
@@ -22,6 +23,10 @@ namespace TimeManagementSpace
         private bool running = true;
         public LineDraw lineGuard;
 
+        [Header("Power Ups")]
+        public Skillsbase skillsbase;
+        public List<PowerUps> pwps;
+
         [SerializeField] private GameObject[] spawnPoints;
         
         void Start()
@@ -31,6 +36,11 @@ namespace TimeManagementSpace
             spawnPoints = GameObject.FindGameObjectsWithTag("WalkingTarget");
             lineGuard = GameObject.FindGameObjectWithTag("LineController").GetComponent<LineDraw>();
 
+            //get all fill amount for skill images delay
+            foreach (var t in pwps)
+            {
+                t.imgFillCount = 1/t.timeDelayFixed;
+            }
         }
 
         void Update()
@@ -52,6 +62,32 @@ namespace TimeManagementSpace
                     }
 
                 }
+
+                //update the pwp timer 
+                foreach (var p in pwps)
+                {
+                    
+                    //check if the delay is on
+                    if (p.timeDelayFluid > 0)
+                    {
+                        p.timeDelayFluid -= Time.deltaTime;
+                        p.imgFill.fillAmount = p.timeDelayFluid / p.timeDelayFixed;
+                    }
+                    else if(!p.isUsed)
+                    {
+                        skillsbase.turnButtonOn(p.name);
+                    }
+                    else if(p.isUsed)
+                    {
+                        p.timeDelayFluid = p.timeDelayFixed;
+                        p.isUsed = false;
+                        p.imgFill.fillAmount = 1;
+                    }
+
+                }
+
+                
+
                 //Para não deixar o jogo parado, se o jogador ja tiver capturado todos os inimigos da wave
                 //ela adianta para a próxima wave, assim deixando tempo para o jogador bater o recorde de tempo
                 var enemyCount = lineGuard.ReturnEnCount();
@@ -72,6 +108,17 @@ namespace TimeManagementSpace
                 if (timer <= 0f)
                 {
                     EndTimer();
+                }
+            }
+        }
+
+        public void isPwpUsed(string namePwpUsed)
+        {
+            foreach (var v in pwps)
+            {
+                if (namePwpUsed == v.name)
+                {
+                    v.isUsed = true;
                 }
             }
         }
@@ -127,5 +174,15 @@ namespace TimeManagementSpace
     {
         public float timeToSpawn;
         public List<GameObject> pfbEnemys;
+    }
+    [System.Serializable]
+    public class PowerUps
+    {
+        public string name;
+        public float timeDelayFluid;
+        public float timeDelayFixed;
+        public bool isUsed = false;
+        public Image imgFill;
+        public float imgFillCount;
     }
 }
