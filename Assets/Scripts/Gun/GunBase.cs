@@ -13,6 +13,7 @@ public class GunBase : MonoBehaviour
     public Transform positionToShootLine;
     public GameObject[] positionObjectives;
     
+    
 
     public Transform target;
     private Coroutine _currentCoroutine;
@@ -53,8 +54,14 @@ public class GunBase : MonoBehaviour
     {
         shootDelay = Random.Range(3f, 7f);
         target = GameObject.FindGameObjectWithTag("LineController").transform;
+        findObjectives();
+    }
+
+    public void findObjectives()
+    {
         positionObjectives = GameObject.FindGameObjectsWithTag("Objectives");
     }
+
 
     // Update is called once per frame
     private void Start()

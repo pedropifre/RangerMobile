@@ -56,11 +56,11 @@ public class ProjectileBase : MonoBehaviour
         else if (collision.gameObject.tag == "Objectives")
         {
 
-            var castleHealth = collision.gameObject.GetComponent<HealthBase>();
+            var castleHealth = collision.gameObject.GetComponent<ObjectiveBase>();
             if (castleHealth != null)
             {
                 StartCoroutine(DamageColor(collision.gameObject));
-                castleHealth.Damage(1);
+                castleHealth.DamageBase(1);
                 
             }
         }

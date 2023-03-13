@@ -12,6 +12,7 @@ TagManager:
   - ColliderWall
   - SFXManager
   - ProjectileObjective
+  - AttackPoint
   layers:
   - Default
   - TransparentFX
