@@ -25,7 +25,7 @@ public class HealthBase : MonoBehaviour, IDamagable
     [Header("UILife")]
     public TextMeshProUGUI currentLife;
     public TextMeshProUGUI MaxLife;
-    public Image lifeBar;
+    public SpriteRenderer lifeBar;
     private float _LifeDropGraph;
 
 
@@ -37,7 +37,8 @@ public class HealthBase : MonoBehaviour, IDamagable
         {
             flashColor = GetComponent<FlashColor>();
         }
-        _LifeDropGraph = StartLife / 1;
+        
+        _LifeDropGraph = (float)1 / _currentLife;
     }
     public void Init()
     {
@@ -62,7 +63,7 @@ public class HealthBase : MonoBehaviour, IDamagable
         if (currentLife != null)
         {
             currentLife.text = _currentLife.ToString();
-            lifeBar.fillAmount = _currentLife/StartLife;
+            
         }
     }
  
@@ -78,15 +79,15 @@ public class HealthBase : MonoBehaviour, IDamagable
         OnDamage?.Invoke(this);
         //update UI
         UpdateLife();
-        
-        if (_currentLife <= 0)
+
+        //update UI
+        if (lifeBar != null)
         {
-            //resolve destroing objective here
-            if (gameObject.tag == "LineController")
-            {
-                //game over screen
-            }
+            if (lifeBar.size.x - (_LifeDropGraph * f) < 0) lifeBar.size = new Vector2(0, 1);
+            else lifeBar.size = new Vector2(lifeBar.size.x - (_LifeDropGraph * f), 1);
         }
+        
+        
         if (flashColor != null)
         {
             flashColor.Flash();

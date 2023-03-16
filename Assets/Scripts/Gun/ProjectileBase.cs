@@ -32,7 +32,7 @@ public class ProjectileBase : MonoBehaviour
     }
     private void Update()
     {
-        if(gameObject!=null) transform.Translate(direction.transform.position*speedprojectile * Time.deltaTime*side);
+        //if(gameObject!=null) transform.Translate(direction.transform.position*speedprojectile * Time.deltaTime*side);
         
     }
 

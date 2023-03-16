@@ -76,41 +76,8 @@ public class GunBase : MonoBehaviour
     }
     void Update()
     {
-        
-        
 
-        //raycast start
-        if (Input.touchCount > 0 )
-        {
-            // Get the direction from the current game object to the target game object
-            Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
-
-            // Rotate the game object to face the target game object
-            transform.right = direction;
-
-            Touch touch = Input.GetTouch(0);
-
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
-            hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-            //Debug.Log(hit.collider);
-
-            //check the distance between the enemy and the line
-            if (hit.collider != null && hit.collider.tag == "LineController" && canShootAll)
-            {
-                float distance = Vector2.Distance(transform.position, hit.point);
-
-                //Debug.Log("Monster = " + gameObject.name + " Distance = " + distance);
-                if (distance < distanceToShoot )
-                {
-                    //Debug.Log("Monster "+gameObject.name+" Atirar");
-                    //StartCoroutine(StartShoot());
-                }
-                
-            }
-
-        }
-        else if(canShootAll)
+        if(canShootAll)
         {
             StartCoroutine(StartShootObjective());
             
