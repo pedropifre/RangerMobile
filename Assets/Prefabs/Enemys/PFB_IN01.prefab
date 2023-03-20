@@ -338,10 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerPoints: []
-  isMover: 0
-  stopDuration: 0
-  movementSpeed: 0
-  ease: 27
+  isMover: 1
+  stopDuration: 3
+  movementSpeed: 2
+  ease: 1
   objAttack: {fileID: 3453586438234990927}
   isJumper: 0
   jumpStopTimeMax: 0
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 3338870486407329898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 3}
   m_Children: []
   m_Father: {fileID: 3338870486356549304}
   m_RootOrder: 0
@@ -426,7 +426,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f06c64622c48564082aadf88711bad7, type: 3}
+  m_Sprite: {fileID: -7698422013590585130, guid: 0731e235e0381f140923503341105f87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -447,7 +447,7 @@ Animator:
   m_GameObject: {fileID: 3338870486407329898}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c704e66039bbd3e409d95a12f3617fba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
