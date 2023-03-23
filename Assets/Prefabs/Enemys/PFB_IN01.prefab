@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerPoints: []
+  animator: {fileID: 3338870486407329896}
   isMover: 1
   stopDuration: 3
   movementSpeed: 2

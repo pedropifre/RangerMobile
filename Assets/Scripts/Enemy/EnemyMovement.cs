@@ -7,6 +7,9 @@ public class EnemyMovement : MonoBehaviour
 {
     public List<Transform> TriggerPoints;
 
+    [Header("Animation")]
+    public Animator animator;
+
     [Header("Movement Config")]
     public bool isMover;
     public float stopDuration;
@@ -70,6 +73,39 @@ public class EnemyMovement : MonoBehaviour
 
     #region Movement
 
+    public string Direction(Vector2 endPosition, Vector2 startPosition)
+    {
+        Vector2 direction = endPosition - startPosition;
+
+        // Check the direction and prompt accordingly
+        if (direction.x > 0)
+        {
+            Debug.Log("Right");
+            return "Right";
+        }
+        else if (direction.x < 0)
+        {
+            Debug.Log("Left");
+            return "Left";
+            
+        }
+        else if (direction.y > 0)
+        {
+            Debug.Log("Up");
+            return "Up";
+            
+        }
+        else if (direction.y < 0)
+        {
+            Debug.Log("Down");
+            return "Down";
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     IEnumerator MoveToNextPlace()
     {
         Sequence mySequence = DOTween.Sequence();
@@ -82,11 +118,15 @@ public class EnemyMovement : MonoBehaviour
                 _point = pointNew;
                 gunBase.canShootingObjective = false;
                 _canMove = false;
+                //animation trigger
+                animator.SetTrigger(Direction(TriggerPoints[_point].transform.position, gameObject.transform.position));
                 gameObject.transform.
                     DOMove(TriggerPoints[_point].transform.position, movementSpeed).SetEase(ease); 
                 yield return new WaitForSeconds(movementSpeed);
+                animator.SetTrigger("PartialIdle");
                 gunBase.canShootingObjective = true;
                 yield return new WaitForSeconds(stopDuration);
+                animator.SetTrigger("Idle");
                 _canMove = true;
             }
             
