@@ -13,6 +13,7 @@ TagManager:
   - SFXManager
   - ProjectileObjective
   - AttackPoint
+  - Rock
   layers:
   - Default
   - TransparentFX

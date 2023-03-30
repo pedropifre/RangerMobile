@@ -75,27 +75,27 @@ public class EnemyMovement : MonoBehaviour
 
     public string Direction(Vector2 endPosition, Vector2 startPosition)
     {
-        Vector2 direction = endPosition - startPosition;
 
-        // Check the direction and prompt accordingly
-        if (direction.x > 0)
+        // Calculate the angle between the two positions
+        float angle = Mathf.Atan2(endPosition.y - startPosition.y, endPosition.x - startPosition.x) * Mathf.Rad2Deg;
+
+        // Check the angle and prompt accordingly
+        if (angle > -45 && angle <= 45)
         {
             Debug.Log("Right");
             return "Right";
         }
-        else if (direction.x < 0)
-        {
-            Debug.Log("Left");
-            return "Left";
-            
-        }
-        else if (direction.y > 0)
+        else if (angle > 45 && angle <= 135)
         {
             Debug.Log("Up");
             return "Up";
-            
         }
-        else if (direction.y < 0)
+        else if (angle > 135 || angle <= -135)
+        {
+            Debug.Log("Left");
+            return "Left";
+        }
+        else if (angle > -135 && angle <= -45)
         {
             Debug.Log("Down");
             return "Down";
@@ -104,6 +104,7 @@ public class EnemyMovement : MonoBehaviour
         {
             return null;
         }
+        
     }
 
     IEnumerator MoveToNextPlace()
@@ -126,7 +127,7 @@ public class EnemyMovement : MonoBehaviour
                 animator.SetTrigger("PartialIdle");
                 gunBase.canShootingObjective = true;
                 yield return new WaitForSeconds(stopDuration);
-                animator.SetTrigger("Idle");
+                //animator.SetTrigger("Idle");
                 _canMove = true;
             }
             
